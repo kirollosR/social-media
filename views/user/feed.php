@@ -67,32 +67,32 @@
         <!-- row -->
 
         <div class="container-fluid">
-            <div class="card">
-                <div class="card-body">
-                    <form action="#" class="form-profile">
-                        <div class="form-group">
-                            <textarea class="form-control" name="addPost" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <ul class="mb-0 form-profile__icons">
-                                <li class="d-inline-block">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
-                                </li>
-                                <li class="d-inline-block">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
-                                </li>
-                                <li class="d-inline-block">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
-                                </li>
-                                <li class="d-inline-block">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
-                                </li>
-                            </ul>
-                            <button class="btn btn-primary px-3 ml-4">Send</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<!--            <div class="card">-->
+<!--                <div class="card-body">-->
+<!--                    <form action="#" class="form-profile">-->
+<!--                        <div class="form-group">-->
+<!--                            <textarea class="form-control" name="addPost" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>-->
+<!--                        </div>-->
+<!--                        <div class="d-flex align-items-center">-->
+<!--                            <ul class="mb-0 form-profile__icons">-->
+<!--                                <li class="d-inline-block">-->
+<!--                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>-->
+<!--                                </li>-->
+<!--                                <li class="d-inline-block">-->
+<!--                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>-->
+<!--                                </li>-->
+<!--                                <li class="d-inline-block">-->
+<!--                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>-->
+<!--                                </li>-->
+<!--                                <li class="d-inline-block">-->
+<!--                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                            <button class="btn btn-primary px-3 ml-4">Send</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
 
                 <div class="card">
                     <div class="card-body">
