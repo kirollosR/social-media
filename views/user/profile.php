@@ -151,7 +151,7 @@
                                         <li class="d-inline-block"><img class="rounded" width="60" height="60" src="../../images/imgs/1.png" alt=""></li>
                                     </ul> -->
 
-                                    <div class="media mt-3">
+                                    <!-- <div class="media mt-3">
                                         <img class="mr-3 circle-rounded circle-rounded" src="../../assets/images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
                                         <div class="media-body">
                                             <div class="d-sm-flex justify-content-between mb-2">
@@ -163,7 +163,7 @@
                                             </div>
                                             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
