@@ -105,12 +105,15 @@
                                 <td>Air Conditioner</td>
 
 
-                                <td><span>
-    <!--                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>-->
-                                        <!--                                            <a type="submit" href="#" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a>-->
-
-                                                <button type="button" class="btn mb-1 btn-rounded btn-outline-danger"><span class="ti-trash"></span></button>
-                                            </span>
+                                <td>
+                                    <form action="keyword.php" method="post">
+                                        <span>
+        <!--                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>-->
+                                            <!--                                            <a type="submit" href="#" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a>-->
+                                            <input type="hidden" name="productId" value="<?php //echo $product["id"]; ?>">
+                                            <button type="button" class="btn mb-1 btn-rounded btn-outline-danger"><span class="ti-trash"></span></button>
+                                        </span>
+                                    </form>
                                 </td>
                             </tr>
 
