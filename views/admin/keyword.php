@@ -72,6 +72,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Keywords
+                            <?php //TODO: onclick="window.location.href='addKeyword.php'">Add keyword ?>
                             <button type="button" class="btn mb-1 btn-primary" style="float: right;" onclick="window.location.href='addKeyword.php'">Add keyword<span class="btn-icon-right"><i class="fa fa-plus"></i></span>
                             </button>
                         </h4>

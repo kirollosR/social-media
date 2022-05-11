@@ -70,53 +70,44 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Vertical Form</h4>
+                        <h4 class="card-title">Update profile data</h4>
                         <div class="basic-form">
                             <form>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label>Email</label>
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" value="First Name">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control" placeholder="Password">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" value="First Name">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Address</label>
-                                    <input type="text" class="form-control" placeholder="1234 Main St">
-                                </div>
-                                <div class="form-group">
-                                    <label>Address 2</label>
-                                    <input type="text" class="form-control" placeholder="Apartment, studio, or floor">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label>City</label>
-                                        <input type="text" class="form-control">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" value="Email">
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label>State</label>
-                                        <select id="inputState" class="form-control">
-                                            <option selected="selected">Choose...</option>
-                                            <option>Option 1</option>
-                                            <option>Option 2</option>
-                                            <option>Option 3</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Zip</label>
-                                        <input type="text" class="form-control">
+                                    <div class="form-group col-md-6">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" value="Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox">
-                                        <label class="form-check-label">Check me out</label>
-                                    </div>
+                                    <label>UserName</label>
+                                    <input type="text" class="form-control" value="k33_0">
                                 </div>
-                                <button type="submit" class="btn btn-dark">Sign in</button>
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <select id="inputState" class="form-control">
+                                        <option selected="selected">Choose...</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn mb-1 btn-primary">Add</button>
+                                <button type="button" class="btn mb-1 btn-secondary" onclick="window.location.href='profile.php'">Back</button>
                             </form>
                         </div>
                     </div>
