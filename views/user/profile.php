@@ -86,7 +86,7 @@
                                     </div> -->
                                 </div>
                                 <div class="col-12 text-center">
-                                    <button type="button" class="btn mb-1 btn-outline-danger px-5" onclick="window.location.href='updateData.php'">Update Profile</button>
+                                    <button type="button" class="btn mb-1 btn-outline-danger px-5" onclick="window.location.href='updateProfile.php'">Update Profile</button>
                                 </div>
                                 <div class="col-12 text-center">
                                     <button class="btn btn-danger px-5" onclick="window.location.href='updateData.php'">Update Data</button>

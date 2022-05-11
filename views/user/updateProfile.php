@@ -9,7 +9,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <!-- Custom Stylesheet -->
-    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
 
 </head>
 
