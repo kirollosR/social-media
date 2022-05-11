@@ -38,7 +38,7 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-        <?php @include_once '../../components/navbar.php' ?>
+        <?php @include_once '../components/navbar.php' ?>
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -46,7 +46,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <?php @include_once '../../components/admin-sidebar.php';?>
+        <?php @include_once '../components/admin-sidebar.php';?>
         <!--**********************************
             Sidebar end
         ***********************************-->

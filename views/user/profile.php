@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Profile</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../images/logo-color.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <!-- Custom Stylesheet -->
-    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -38,7 +38,7 @@
     <!--**********************************
         Nav header start
     ***********************************-->
-    <?php @include_once '../../components/navbar.php' ?>
+    <?php @include_once '../components/navbar.php' ?>
     <!--**********************************
         Nav header end
     ***********************************-->
@@ -46,7 +46,7 @@
     <!--**********************************
         Sidebar start
     ***********************************-->
-    <?php @include_once '../../components/user-sidebar.php';?>
+    <?php @include_once '../components/user-sidebar.php';?>
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -64,7 +64,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center mb-4">
-                                <img class="mr-3" src="../../images/avatar/11.png" width="80" height="80" alt="">
+                                <img class="mr-3" src="../../assets/images/avatar/11.png" width="80" height="80" alt="">
                                 <div class="media-body">
                                     <h3 class="mb-0">Pikamy Cha</h3>
                                 </div>
@@ -130,7 +130,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="../../images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
                                         <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
@@ -149,7 +149,7 @@
                                     </ul> -->
 
                                     <div class="media mt-3">
-                                        <img class="mr-3 circle-rounded circle-rounded" src="../../images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
+                                        <img class="mr-3 circle-rounded circle-rounded" src="../../assets/images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
                                         <div class="media-body">
                                             <div class="d-sm-flex justify-content-between mb-2">
                                                 <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
@@ -165,7 +165,7 @@
                             </div>
 
                             <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="../../images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
                                         <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
@@ -233,10 +233,10 @@
     Scripts
 ***********************************-->
 <script src="../../plugins/common/common.min.js"></script>
-<script src="../../js/custom.min.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/gleek.js"></script>
-<script src="../../js/styleSwitcher.js"></script>
+<script src="../../assets/js/custom.min.js"></script>
+<script src="../../assets/js/settings.js"></script>
+<script src="../../assets/js/gleek.js"></script>
+<script src="../../assets/js/styleSwitcher.js"></script>
 
 </body>
 

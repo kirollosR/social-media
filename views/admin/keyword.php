@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Keywords</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../images/logo-color.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <!-- Custom Stylesheet -->
-    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 </head>
@@ -39,7 +39,7 @@
     <!--**********************************
         Nav header start
     ***********************************-->
-    <?php @include_once '../../components/navbar.php' ?>
+    <?php @include_once '../components/navbar.php' ?>
     <!--**********************************
         Nav header end
     ***********************************-->
@@ -47,7 +47,7 @@
     <!--**********************************
         Sidebar start
     ***********************************-->
-    <?php @include_once '../../components/admin-sidebar.php';?>
+    <?php @include_once '../components/admin-sidebar.php';?>
     <!--**********************************
         Sidebar end
     ***********************************-->
@@ -121,7 +121,7 @@
     <!--**********************************
         Footer start
     ***********************************-->
-    <?php include_once '../../components/footer.php' ?>
+    <?php @include_once '../components/footer.php' ?>
     <!--**********************************
         Footer end
     ***********************************-->
@@ -134,10 +134,10 @@
     Scripts
 ***********************************-->
 <script src="../../plugins/common/common.min.js"></script>
-<script src="../../js/custom.min.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/gleek.js"></script>
-<script src="../../js/styleSwitcher.js"></script>
+<script src="../../assets/js/custom.min.js"></script>
+<script src="../../assets/js/settings.js"></script>
+<script src="../../assets/js/gleek.js"></script>
+<script src="../../assets/js/styleSwitcher.js"></script>
 
 </body>
 
