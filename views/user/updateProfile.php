@@ -46,7 +46,7 @@
     <!--**********************************
         Sidebar start
     ***********************************-->
-    <?php @include_once '../components/admin-sidebar.php';?>
+    <?php @include_once '../components/user-sidebar.php';?>
     <!--**********************************
         Sidebar end
     ***********************************-->
