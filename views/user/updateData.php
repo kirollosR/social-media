@@ -97,16 +97,16 @@
                                     <label>UserName</label>
                                     <input type="text" class="form-control" value="k33_0">
                                 </div>
-                                <div class="form-group">
-                                    <label>State</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected="selected">Choose...</option>
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                        <option>Option 3</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn mb-1 btn-primary">Add</button>
+<!--                                <div class="form-group">-->
+<!--                                    <label>State</label>-->
+<!--                                    <select id="inputState" class="form-control">-->
+<!--                                        <option selected="selected">Choose...</option>-->
+<!--                                        <option>Option 1</option>-->
+<!--                                        <option>Option 2</option>-->
+<!--                                        <option>Option 3</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+                                <button type="submit" class="btn mb-1 btn-primary">Update</button>
                                 <button type="button" class="btn mb-1 btn-secondary" onclick="window.location.href='profile.php'">Back</button>
                             </form>
                         </div>

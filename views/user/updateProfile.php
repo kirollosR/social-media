@@ -72,6 +72,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Edit profile picture & status</h4>
                         <form>
+                            <input type="hidden" name="productId" value="<?php //echo $product["id"]; ?>">
                             <div class="media align-items-center mb-4">
                                 <img class="mr-3" src="../../assets/images/avatar/11.png" width="80" height="80" alt="">
                                     <div class="input-group mb-3">
