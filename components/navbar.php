@@ -1,10 +1,10 @@
 <div class="nav-header">
     <div class="brand-logo">
         <a href="index.html">
-            <b class="logo-abbr"><img src="../images/logo1.png" alt=""> </b>
-            <span class="logo-compact"><img src="../images/logo1.png" alt=""></span>
+            <b class="logo-abbr"><img src="../../images/logo1.png" alt=""> </b>
+            <span class="logo-compact"><img src="../../images/logo1.png" alt=""></span>
             <span class="brand-title">
-                        <img src="../images/logo1.png" alt="" style="width: 20%;">
+                        <img src="../../images/logo1.png" alt="" style="width: 20%;">
                     </span>
         </a>
     </div>
@@ -51,7 +51,7 @@
                 <li class="icons dropdown">
                     <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
 <!--                        <span class="activity active"></span>-->
-                        <img src="../images/user/1.png" height="40" width="40" alt="">
+                        <img src="../../images/user/1.png" height="40" width="40" alt="">
                     </div>
                     <div class="drop-down dropdown-profile   dropdown-menu">
                         <div class="dropdown-content-body">
