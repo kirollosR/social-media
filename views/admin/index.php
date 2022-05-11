@@ -9,7 +9,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <!-- Custom Stylesheet -->
-    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
 
 </head>
 
@@ -292,9 +292,9 @@
             </div>
 
             <div class="row">
+            </div>
+            <!-- #/ container -->
         </div>
-        <!-- #/ container -->
-    </div>
     <!--**********************************
         Content body end
     ***********************************-->
@@ -316,10 +316,10 @@
     Scripts
 ***********************************-->
 <script src="../../plugins/common/common.min.js"></script>
-<script src="../../assets/js/custom.min.js"></script>
-<script src="../../assets/js/settings.js"></script>
-<script src="../../assets/js/gleek.js"></script>
-<script src="../../assets/js/styleSwitcher.js"></script>
+<script src="../../js/custom.min.js"></script>
+<script src="../../js/settings.js"></script>
+<script src="../../js/gleek.js"></script>
+<script src="../../js/styleSwitcher.js"></script>
 
 </body>
 
