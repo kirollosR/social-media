@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../images/logo-color.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <!-- Custom Stylesheet -->
     <link href="../../css/style.css" rel="stylesheet">
 
@@ -79,7 +79,7 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        <?php include_once '../../components/footer.php' ?>
+        <?php @include_once '../components/footer.php' ?>
         <!--**********************************
             Footer end
         ***********************************-->

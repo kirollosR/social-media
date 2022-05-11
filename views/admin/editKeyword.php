@@ -75,17 +75,8 @@
                             <form>
                                 <div class="form-row">
                                 <div class="form-group col-md-4">
-                                        <label>Old Word</label>
-                                        <select id="inputState" class="form-control">
-                                            <option selected="selected">Choose...</option>
-                                            <option>Option 1</option>
-                                            <option>Option 2</option>
-                                            <option>Option 3</option>
-                                        </select>
-                                </div>    
-                                <div class="form-group col-md-4">
-                                        <label>New Word</label>
-                                        <input type="text" class="form-control">
+                                        <label>Word</label>
+                                        <input type="text" class="form-control" value="Word">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Rate</label>

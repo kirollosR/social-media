@@ -86,7 +86,10 @@
                                     </div> -->
                                 </div>
                                 <div class="col-12 text-center">
-                                    <button class="btn btn-danger px-5" onclick="window.location.href='updateData.php'">Update Profile</button>
+                                    <button type="button" class="btn mb-1 btn-outline-danger px-5" onclick="window.location.href='updateData.php'">Update Profile</button>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-danger px-5" onclick="window.location.href='updateData.php'">Update Data</button>
                                 </div>
                             </div>
 
@@ -179,30 +182,30 @@
                                 </div>
                             </div>
                             <div class="card">
-                        <div class="card-body">
-                            <form action="#" class="form-profile">
-                                <div class="form-group">
-                                    <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <ul class="mb-0 form-profile__icons">
-                                        <li class="d-inline-block">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary px-3 ml-4">Send</button>
-                                </div>
-                            </form>
-                        </div>
+<!--                        <div class="card-body">-->
+<!--                            <form action="#" class="form-profile">-->
+<!--                                <div class="form-group">-->
+<!--                                    <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>-->
+<!--                                </div>-->
+<!--                                <div class="d-flex align-items-center">-->
+<!--                                    <ul class="mb-0 form-profile__icons">-->
+<!--                                        <li class="d-inline-block">-->
+<!--                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>-->
+<!--                                        </li>-->
+<!--                                        <li class="d-inline-block">-->
+<!--                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>-->
+<!--                                        </li>-->
+<!--                                        <li class="d-inline-block">-->
+<!--                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>-->
+<!--                                        </li>-->
+<!--                                        <li class="d-inline-block">-->
+<!--                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                    <button class="btn btn-primary px-3 ml-4">Send</button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
                     
                         </div>
                     </div>
@@ -220,7 +223,7 @@
     <!--**********************************
         Footer start
     ***********************************-->
-    <?php @include_once '../../components/footer.php' ?>
+    <?php @include_once '../components/footer.php' ?>
     <!--**********************************
         Footer end
     ***********************************-->

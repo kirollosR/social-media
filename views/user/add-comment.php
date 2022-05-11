@@ -165,7 +165,7 @@
                                     <div class="card-body">
                                         <form action="#" class="form-profile">
                                             <div class="form-group">
-                                                <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
+                                                <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Write a comment..."></textarea>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <ul class="mb-0 form-profile__icons">
