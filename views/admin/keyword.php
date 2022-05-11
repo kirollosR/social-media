@@ -99,7 +99,7 @@
                                     <td><span>
 <!--                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>-->
 <!--                                            <a type="submit" href="#" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a>-->
-                                            <button type="button" class="btn mb-1 btn-rounded btn-outline-info"><span class="fa fa-pencil color-muted m-r-5"></span></button>
+                                            <button type="button" class="btn mb-1 btn-rounded btn-outline-info" onclick="window.location.href='editKeyword.php'"><span class="fa fa-pencil color-muted m-r-5"></span></button>
                                             <button type="button" class="btn mb-1 btn-rounded btn-outline-danger"><span class="ti-trash"></span></button>
                                         </span>
                                     </td>
