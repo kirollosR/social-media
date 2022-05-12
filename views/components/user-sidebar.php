@@ -6,7 +6,7 @@
                     <i class="fa fa-file-text-o menu-icon"></i><span class="nav-text">Topics</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="../user/feed.php">Wears</a></li>
+                    <li><a href="../user/index.php">Wears</a></li>
                     <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                 </ul>
             </li>
