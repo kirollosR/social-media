@@ -1,6 +1,7 @@
 <?php
 require_once '../../models/user.php';
 require_once '../../controllers/DBController.php';
+require_once '../models/vars.php';
 
 class AuthController
 {
@@ -57,8 +58,8 @@ class AuthController
 
         if ($this->db->openConnection()) {
             $query =
-                "INSERT INTO users(name,email,password,roleId)
-                 VALUES ('$user->name','$user->email','$user->password',2)";
+                "INSERT INTO `users`(`user_firstname`, `user_lastname`, `user_email`, `username`, `password`, `gender_id`, `role_id`, `user_profile`)
+                 VALUES ($'user->user_firstname','$user->user_lastname','$user->user_email','$user->username','$user->password',$user->gender_id,$user,'[value-8]')";
 
             $result = $this->db->insert($query);
             if ($result != false) {

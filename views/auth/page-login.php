@@ -3,8 +3,6 @@ require_once '../../models/user.php';
 require_once '../../controllers/AuthController.php';
 require_once '../../models/vars.php';
 
-$vars = new vars;
-
 $errorMsg = "";
 
 //logout end session
@@ -30,7 +28,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             if(!isset($_SESSION["userId"])){
                 session_start();
             }
-            if($_SESSION["userRole"] == $vars->user){
+            if($_SESSION["userRole"] == $user){
                 header("Location: ../admin/index.php");
             }else{
                 header('Location: ../user/index.php');
@@ -109,7 +107,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                                     </div>
                                     <button class="btn login-form__btn submit w-100" type="submit">Sign In</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.php" class="text-primary">Sign Up</a> now</p>
+                                <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.php" class="text-primary">Register</a> now</p>
                             </div>
                         </div>
                     </div>

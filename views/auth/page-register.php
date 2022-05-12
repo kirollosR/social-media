@@ -1,3 +1,37 @@
+<?php
+@require_once '../../models/user.php';
+@require_once '../../controllers/AuthController.php';
+@require_once '../../models/vars.php';
+
+$errormsg = "";
+
+if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_POST['user_email']) && isset($_POST['username']) && isset($_POST['password'])){
+    if(!empty($_POST['user_firstname']) && !empty($_POST['user_lastname']) && !empty($_POST['user_email']) && !empty($_POST['username']) && !empty($_POST['password'])){
+        $user = new user;
+        $auth = new AuthController;
+
+        $user->user_firstname = $_POST['user_firstname'];
+        $user->user_lastname = $_POST['user_lastname'];
+        $user->user_email = $_POST('user_email');
+        $user->username = $_POST('username');
+        $user->gender_id = $_POST('gender');
+        $user->password = $_POST['password'];
+
+        if(!$auth->register($user)){
+            if(!isset($_SESSION["userId"])){
+                session_start();
+            }
+            $errorMsg = $_SESSION['errorMsg'];
+        }else{
+            header('Location: ../Client/index.php');
+        }
+    }else{
+        $errorMsg = $_SESSION['errorMsg'];
+    }
+}else{
+    $errorMsg = "Please fill all fields";
+}
+?>
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -8,7 +42,7 @@
     <title>Register</title>
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="../../assets/css/style.css" rel="stylesheet">
     
@@ -41,32 +75,34 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                
-                                    <a class="text-center" href="index.html"> <h4>Rosella</h4></a>
-        
-                                <form class="mt-5 mb-5 login-input">
+
+                                <!--LOGO-->
+                                <center><b class="logo-abbr"><img src="../../assets/images/logo-color.png" alt=""> </b></center>
+
+
+                                <form id="formAuthentication" class="mt-5 mb-5 login-input" action="page-register.php" method="POST">
                                     <div class="form-group">
-                                        <input type="text" class="form-control"  placeholder="First Name" required>
+                                        <input type="text" id="user_firstname" name="user_firstname" class="form-control"  placeholder="First Name" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control"  placeholder="Last Name" required>
+                                        <input type="text" id="user_lastname" name="user_lastname" class="form-control"  placeholder="Last Name" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control"  placeholder="Email" required>
+                                        <input type="email" id="user_email" name="user_email" class="form-control"  placeholder="Email" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control"  placeholder="username" required>
+                                        <input type="text" id="username" name="username" class="form-control"  placeholder="username" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Gender: </label>
-                                        <select class="form-control" id="sel1">
+                                        <select class="form-control" id="sel1" name="gender">
                                             <option>1</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password" required>
+                                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                                     </div>
-                                    <button class="btn login-form__btn submit w-100">Register</button>
+                                    <button class="btn login-form__btn submit w-100" type="submit">Register</button>
                                 </form>
                                     <p class="mt-5 login-form__footer">Have account <a href="page-login.php" class="text-primary">Log in </a> now</p>
                                     </p>
