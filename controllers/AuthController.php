@@ -1,6 +1,7 @@
 <?php
 require_once '../../models/user.php';
-require_once '../../controllers/DBController.php';
+//require_once '../../controllers/DBController.php';
+require_once 'DBController.php';
 
 class AuthController
 {
