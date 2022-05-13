@@ -13,6 +13,10 @@ if(isset($_GET['logout'])){
     session_destroy();
 }
 
+//if(!isset($_SESSION)){
+//    session_start();
+//}
+
 if(isset($_POST['email']) && isset($_POST['password'])){
     if(!empty($_POST['email']) && !empty($_POST['password'])){
         $user = new user;
@@ -22,12 +26,10 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         $user->password = $_POST['password'];
 
         if(!$auth->login($user)){
-            if(!isset($_SESSION["user_id"])){
-                session_start();
-            }
+
             $errorMsg = $_SESSION['errorMsg'];
         }else{
-            if(!isset($_SESSION["userId"])){
+            if(!isset($_SESSION["user_id"])){
                 session_start();
             }
             if($_SESSION["role_id"] == $vars->admin){

@@ -87,6 +87,7 @@ class AuthController
                 $_SESSION['username'] = $user->username;
                 $_SESSION['gender_id'] = $user->gender_id;
                 $_SESSION['role_id'] = $this->vars->user;
+                $_SESSION['user_profile'] = "";
 
                 $this->db->closeConnection();
                 return true;
