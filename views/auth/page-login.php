@@ -5,6 +5,8 @@ require_once '../../models/vars.php';
 
 $errorMsg = "";
 
+$vars = new vars;
+
 //logout end session
 if(isset($_GET['logout'])){
     session_start();
@@ -28,7 +30,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             if(!isset($_SESSION["userId"])){
                 session_start();
             }
-            if($_SESSION["userRole"] == $user){
+            if($_SESSION["role_id"] == $vars->admin){
                 header("Location: ../admin/index.php");
             }else{
                 header('Location: ../user/index.php');

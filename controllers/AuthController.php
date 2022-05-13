@@ -1,11 +1,13 @@
 <?php
 require_once '../../models/user.php';
 require_once '../../controllers/DBController.php';
-require_once '../models/vars.php';
+require_once '../../models/vars.php';
+
 
 class AuthController
 {
     protected $db;
+    protected $vars;
 
     //1. Open connection
     //2. Run query
@@ -52,22 +54,39 @@ class AuthController
         }
     }
 
+    public function getGenders(){
+        $this->db = new DBController;
+
+        if($this->db->openConnection()){
+            $query = "SELECT * FROM gender";
+            return $this->db->select($query);
+        }else{
+            echo "Error in DataBase connection";
+            return false;
+        }
+    }
+
     public function register (user $user)
     {
         $this->db = new DBController;
+        $this->vars = new vars;
 
         if ($this->db->openConnection()) {
             $query =
-                "INSERT INTO `users`(`user_firstname`, `user_lastname`, `user_email`, `username`, `password`, `gender_id`, `role_id`, `user_profile`)
-                 VALUES ($'user->user_firstname','$user->user_lastname','$user->user_email','$user->username','$user->password',$user->gender_id,$user,'[value-8]')";
+                "INSERT INTO `users`(`user_firstname`, `user_lastname`, `user_email`, `username`, `password`, `gender_id`, `role_id`)
+                 VALUES ('$user->user_firstname','$user->user_lastname','$user->user_email','$user->username','$user->password',$user->gender_id,1)";
 
             $result = $this->db->insert($query);
             if ($result != false) {
                 session_start();
 
-                $_SESSION['userId'] = $result;
-                $_SESSION['userName'] = $user->name;
-                $_SESSION['userRole'] = 2;
+                $_SESSION['user_id'] = $result;
+                $_SESSION['user_firstname'] = $user->user_firstname;
+                $_SESSION['user_lastname'] = $user->user_lastname;
+                $_SESSION['user_email'] = $user->user_email;
+                $_SESSION['username'] = $user->username;
+                $_SESSION['gender_id'] = $user->gender_id;
+                $_SESSION['role_id'] = $this->vars->user;
 
                 $this->db->closeConnection();
                 return true;
@@ -82,10 +101,65 @@ class AuthController
         }
     }
 
-    public function isAuthenticated($roleId){
-        if(!isset($_SESSION["userRole"])){  //authentication
+    public function checkPassword($pwd) {
+        if (strlen($pwd) < 8) {
+            $errors = "Password is too short!";
+            return $errors;
+        }
+
+        if (!preg_match("#[0-9]+#", $pwd)) {
+            $errors = "Password must include at least one number!";
+            return $errors;
+        }
+
+        if (!preg_match("#[a-zA-Z]+#", $pwd)) {
+            $errors = "Password must include at least one letter!";
+            return $errors;
+        }
+
+        return "";
+    }
+
+    public function checkUsername($username) {
+        $this->db = new DBController;
+
+        if($this->db->openConnection()){
+            $query = "SELECT username FROM users
+                      WHERE username='$username'";
+            $result = $this->db->select($query);
+            if(count($result)!=0){
+                return "That username is taken. Try another.";
+            }else{
+                return "";
+            }
+        }else{
+            echo "Error in DataBase connection";
             return false;
-        }else if($_SESSION["userRole"]!= $roleId) { //authorization
+        }
+    }
+
+    public function checkEmail($email) {
+        $this->db = new DBController;
+
+        if($this->db->openConnection()){
+            $query = "SELECT username FROM users
+                      WHERE user_email = '$email'";
+            $result = $this->db->select($query);
+            if(count($result) != 0){
+                return "This email is already in use. Please use another one.";
+            }else{
+                return "";
+            }
+        }else{
+            echo "Error in DataBase connection";
+            return false;
+        }
+    }
+
+    public function isAuthenticated($role_id){
+        if(!isset($_SESSION["role_id"])){  //authentication
+            return false;
+        }else if($_SESSION["role_id"]!= $role_id) { //authorization
             return false;
         }else{
             return true;

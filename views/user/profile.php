@@ -1,3 +1,10 @@
+<?php
+if(!isset($_SESSION["user_id"]))
+{
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,9 +71,9 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center mb-4">
-                                <img class="mr-3" src="../../assets/images/avatar/11.png" width="80" height="80" alt="">
+                                <img class="mr-3" src="../../assets/images/member/user.png" width="80" height="80" alt="">
                                 <div class="media-body">
-                                    <h3 class="mb-0">Pikamy Cha</h3>
+                                    <h3 class="mb-0"><?php echo $_SESSION['user_firstname'] . " " . $_SESSION['user_lastname']; ?></h3>
                                 </div>
                             </div>
 
