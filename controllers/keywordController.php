@@ -18,11 +18,27 @@ class keywordController
         $this->db=new DBController;
         if($this->db->openConnection())
         {
+            settype($keyword->user_id,'integer');
             $query="insert into keywords values ( '' , '$keyword->keyword_name' , $keyword->keyword_score , $keyword->user_id )";
            return $this->db->insert($query);
         }
         else {
             echo "Error in DataBase connection";
+            return false;
+        }
+    }
+
+    public function getAllKeywords()
+    {
+        $this->db=new DBController;
+        if($this->db->openConnection())
+        {
+            $query="select * from keywords";
+            return $this->db->select($query);
+        }
+        else
+        {
+            echo "Error in Database Connection";
             return false;
         }
     }

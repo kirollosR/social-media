@@ -12,6 +12,8 @@ if(!isset($_SESSION['user_id'])){
     session_start();
 }
 
+$addMsg = false;
+
 if(isset($_POST['topic']))
 {
     if(!empty($_POST['topic']))
@@ -24,6 +26,7 @@ if(isset($_POST['topic']))
         if($topicController->addTopic($topic))
         {
             header("location: topic.php");
+            $addMsg = true;
         }
         else
         {
@@ -69,6 +72,7 @@ if(isset($_POST['delete']))
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <!-- Custom Stylesheet -->
     <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="../../plugins/toastr/css/toastr.min.css" rel="stylesheet">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 </head>
@@ -133,19 +137,34 @@ if(isset($_POST['delete']))
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Add topic</h4>
+
+                            <!-- TOASTER -->
+<!--                            <button type="button" class="btn btn-success m-b-10 m-l-5" id="toastr-success-top-right">Success</button>-->
+
                             <div class="basic-form">
                                 <form action="topic.php" method="POST">
-                                    
                                     <?php
-                                        if($errMsg != ""){
-                                    ?>
+                                    if($errMsg != ""){
+                                        ?>
                                         <br>
                                         <div class="alert alert-danger alert-dismissible fade show">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                             <?php echo $errMsg; ?>
                                         </div>
+                                        <?php
+                                    }
+                                    ?>
+
                                     <?php
-                                        }
+                                    if($addMsg){
+                                        ?>
+                                        <br>
+                                        <div class="alert alert-success alert-dismissible fade show">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                            <?php echo "Topic added successfully."; ?>
+                                        </div>
+                                        <?php
+                                    }
                                     ?>
                                 
                                     <div class="form-row">
@@ -164,8 +183,19 @@ if(isset($_POST['delete']))
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Topics</h4>
-                        
-                        
+
+                        <?php
+                        if($dltMsg){
+                            ?>
+                            <br>
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <?php echo "Topic deleted successfully."; ?>
+                            </div>
+                            <?php
+                        }
+                        ?>
+
                         <?php
                             if (count($topics) == 0)
                             {
@@ -255,8 +285,8 @@ if(isset($_POST['delete']))
 <script src="../../assets/js/gleek.js"></script>
 <script src="../../assets/js/styleSwitcher.js"></script>
 
-<script src="./plugins/toastr/js/toastr.min.js"></script>
-<script src="./plugins/toastr/js/toastr.init.js"></script>
+<script src="../../plugins/toastr/js/toastr.min.js"></script>
+<script src="../../plugins/toastr/js/toastr.init.js"></script>
 
 
 </body>
