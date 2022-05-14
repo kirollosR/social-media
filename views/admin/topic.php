@@ -1,3 +1,62 @@
+<?php
+
+// ADD TOPIC
+
+require_once '../../models/topic.php';
+require_once '../../controllers/TopicController.php';
+
+$errMsg = "";
+$topicController = new TopicController;
+
+if(!isset($_SESSION['user_id'])){
+    session_start();
+}
+
+if(isset($_POST['topic']))
+{
+    if(!empty($_POST['topic']))
+    { 
+        $topic = new topic;
+
+        $topic->topic_name = $_POST['topic'];
+        $topic->user_id = $_SESSION['user_id'];
+
+        if($topicController->addTopic($topic))
+        {
+            header("location: topic.php");
+        }
+        else
+        {
+            $errMsg="Something Went Wrong... Try Again";
+        }
+    }
+    else 
+    {
+        $errMsg = "Please fill all fields";
+    }
+}
+
+// LIST TOPICS FROM DB
+$topics = $topicController->getAllTopics();
+
+// DELETE TOPIC
+$dltMsg = false;
+
+if(isset($_POST['delete']))
+{
+    if(!empty($_POST['topic_id']))
+    {
+        if($topicController->deleteTopic($_POST['topic_id']))
+        {
+            $dltMsg = true;
+            $topics = $topicController->getAllTopics();
+        }
+    }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,15 +129,28 @@
         <div class="container-fluid">
             <!--            <div class="col-lg-6">-->
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Add topic</h4>
                             <div class="basic-form">
-                                <form>
+                                <form action="topic.php" method="POST">
+                                    
+                                    <?php
+                                        if($errMsg != ""){
+                                    ?>
+                                        <br>
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                            <?php echo $errMsg; ?>
+                                        </div>
+                                    <?php
+                                        }
+                                    ?>
+                                
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <input type="text" class="form-control">
+                                        <input type="topic" id="topic" class="form-control" name="topic" placeholder="Topic">
                                         </div>
                                     </div>
 
@@ -88,41 +160,70 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Topics</h4>
-                        <div class="table-responsive"">
-                        <table class="table table-bordered table-striped verticle-middle">
-                            <thead>
-                            <tr>
-                                <th scope="col">Topic</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Air Conditioner</td>
+                        
+                        
+                        <?php
+                            if (count($topics) == 0)
+                            {
+                                ?>
+                                <div class="alert alert-danger alert-dismissible fade show">There is no Topics yet</div>
+                                <?php
+                            }
+                            else
+                            {
+                                ?>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped verticle-middle">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Topic</th>
+                                        <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                <?php
+                                foreach ($topics as $topic)
+                                {
+                                    ?>
+                                    
+                                    <tr>
+                                        <td><?php echo $topic["topic_name"] ?></td>
+                                        <td>
+                                            <form action="topic.php" method="post">
+                                                <span>
+                                                    <input type="hidden" name="topic_id" value="<?php echo $topic["topic_id"]?>">
+                                                    <button type="submit" name="delete" class="btn mb-1 btn-rounded btn-outline-danger"><span class="ti-trash"></span></button>
+                                                </span>
+                                            </form>
+                                        </td>
+                                    </tr>
 
-
-                                <td>
-                                    <form action="keyword.php" method="post">
-                                        <span>
-        <!--                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>-->
-                                            <!--                                            <a type="submit" href="#" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a>-->
-                                            <input type="hidden" name="productId" value="<?php //echo $product["id"]; ?>">
-                                            <button type="button" class="btn mb-1 btn-rounded btn-outline-danger"><span class="ti-trash"></span></button>
-                                        </span>
-                                    </form>
-                                </td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
+                                    <?php
+                                }
+                                ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                            
                 </div>
             </div>
             </div>
+
+            <?php
+                if($dltMsg==true)
+                {  ?>
+                    <!-- toaster -->
+            <?php  }
+            ?>
+
         </div>
         <!--            </div>-->
     </div>
@@ -153,6 +254,10 @@
 <script src="../../assets/js/settings.js"></script>
 <script src="../../assets/js/gleek.js"></script>
 <script src="../../assets/js/styleSwitcher.js"></script>
+
+<script src="./plugins/toastr/js/toastr.min.js"></script>
+<script src="./plugins/toastr/js/toastr.init.js"></script>
+
 
 </body>
 
