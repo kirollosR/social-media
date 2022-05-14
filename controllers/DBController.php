@@ -53,8 +53,8 @@ class DBController
             echo "Error: " . mysqli_error($this->connection);
             return false;
         }else{
-            //this to return id of data inserted
             return $result;
         }
     }
+
 }
