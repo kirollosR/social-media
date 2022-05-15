@@ -1,3 +1,13 @@
+<?php
+if(!isset($_SESSION["user_id"])){
+    session_start();
+}
+
+require_once '../../models/comment.php';
+$Comment = new Comment;
+$comments = $Comment->getComments();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -151,21 +161,31 @@
                                     <div class="media mt-3">
                                         <img class="mr-3 circle-rounded circle-rounded" src="../../assets/images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
                                         <div class="media-body">
-                                            <div class="d-sm-flex justify-content-between mb-2">
-                                                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                                <div class="media-reply__link">
-                                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                                    <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Comment</button>
+                                            <?php 
+                                            foreach($comments as $comment){
+                                                ?>
+
+                                                <div class="d-sm-flex justify-content-between mb-2">
+                                                    <h5 class="mb-sm-0">
+                                                    <?php 
+                                                        $username = $Comment->getUsername($comment['user_id']);
+                                                        echo $username; 
+                                                    ?>
+                                                    <small class="text-muted ml-3"><?php echo $comment['comment_date']?></small></h5>
                                                 </div>
-                                            </div>
-                                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                        </div>
+                                                <p><?php echo $comment['comment_data']?></p>
+                                                </div>
+
+                                                <?php
+                                            }
+                                            
+                                            ?>
                                     </div>
                                     <div class="card">
                                     <div class="card-body">
                                         <form action="#" class="form-profile">
                                             <div class="form-group">
-                                                <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Write a comment..."></textarea>
+                                                <textarea class="form-control" name="comment" id="textarea" cols="30" rows="2" placeholder="Write a comment..."></textarea>
                                             </div>
                                             <div class="d-flex align-items-center">
                                                 <ul class="mb-0 form-profile__icons">
@@ -182,7 +202,7 @@
                                                         <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
                                                     </li>
                                                 </ul>
-                                                <button class="btn btn-primary px-3 ml-4">Send</button>
+                                                <button class="btn btn-primary px-3 ml-4" name="add-comment">Send</button>
                                             </div>
                                         </form>
                                     </div>
