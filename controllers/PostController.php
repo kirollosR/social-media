@@ -51,7 +51,7 @@ class PostController
         }
     }
 
-    public function getAllPostsByUserId($user)
+    public function getAllPostsByUserId(user $user)
     {
         $this->db=new DBController;
         if($this->db->openConnection())
@@ -72,19 +72,19 @@ class PostController
         }
     }
 
-//    public function DeletePost(post $post)
-//    {
-//        $this->db=new DBController;
-//        if($this->db->openConnection())
-//        {
-//            $query="insert into posts values ( '' , $post->topic_id , $post->post_score , $post->user_id , $post->post_id , '$post->post_data' , $post->post_likes )";
-//           return $this->db->delete($query);
-//        }
-//        else {
-//            echo "Error in DataBase connection";
-//            return false;
-//        }
-//    }
+    public function DeletePost($post_id)
+    {
+        $this->db=new DBController;
+        if($this->db->openConnection())
+        {
+            $query = "delete from posts where post_id = $post_id";
+            return $this->db->delete($query);
+        }
+        else {
+            echo "Error in DataBase connection";
+            return false;
+        }
+    }
 
     //*************************
     //***POST RANK FUNCTIONS***

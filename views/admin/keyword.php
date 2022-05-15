@@ -102,7 +102,7 @@ $keywords = $keywordController->getAllKeywords();
                                         <th scope="col">Word</th>
                                         <th scope="col">Weight</th>
                                         <th scope="col">Rate</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>

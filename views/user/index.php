@@ -1,12 +1,25 @@
 <?php
 require_once '../../controllers/PostController.php';
-require_once '../../models/Post.php';
+require_once '../../models/post.php';
 $PostController=new PostController;
 
 $errMsg = "";
-session_start();
+if(!isset($_SESSION['user_id'])){
+    session_start();
+}
 $posts = $PostController->getAllPosts();
 
+if(isset($_POST['delete']))
+{
+    if(!empty($_POST['post_id']))
+    {
+        if($PostController->DeletePost($_POST['post_id']))
+        {
+            $dltMsg = true;
+            $posts = $PostController->getAllPosts();
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,37 +120,45 @@ $posts = $PostController->getAllPosts();
             if (count($posts) == 0)
             {
                 ?>
-                <div class="alert alert-danger alert-dismissible fade show">There is no Topics yet</div>
+                <div class="alert alert-danger alert-dismissible fade show">There is no Posts yet</div>
                 <?php
             }
             else
             {
             ?>
-                <?php
-                foreach ($posts as $post) {
-                ?>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>
-                                        <div class="media-reply__link">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                            <button class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php'">Comment</button>
-                                        </div>
-                                    </div>
+                <div class="card">
+                    <div class="card-body">
+                    <?php
+                    foreach ($posts as $post) {
+                    ?>
 
-                                    <p><?php echo $post["post_data"] ?></p>
+                                <div class="media media-reply">
+                                    <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <div class="d-sm-flex justify-content-between mb-2">
+                                            <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>
+                                            <div class="media-reply__link">
+                                                <form method="POST" action="index.php">
+                                                    <span>
+                                                        <input type="hidden" name="post_id" value="<?php echo $post["post_id"]; ?>">
+                                                        <button type="button" class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                                        <button class="btn btn-transparent p-0 mr-3" type="submit" name="delete"><i class="ti-trash"></i></button>
+                                                        <button type="button" class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php'">Comment</button>
+                                                    </span>
+                                                </form>
+
+                                            </div>
+                                        </div>
+
+                                        <p><?php echo $post["post_data"] ?></p>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php
+                    <?php
+                    }
                 }
-            }
-                ?>
+                    ?>
+                    </div>
+                </div>
 
 
         </div>
