@@ -3,6 +3,18 @@ if(!isset($_SESSION["user_id"]))
 {
     session_start();
 }
+
+require_once '../../models/user.php';
+
+$user = new user;
+
+$user->user_id = $_SESSION["user_id"];
+$user->username = $_SESSION['user_firstname'] . " " . $_SESSION['user_lastname'];
+$user->user_email = $_SESSION['user_email'];
+$user->user_profile = $_SESSION['user_profile'];
+$user->user_status = $_SESSION['user_status'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +85,7 @@ if(!isset($_SESSION["user_id"]))
                             <div class="media align-items-center mb-4">
                                 <img class="mr-3" src="../../assets/images/member/user.png" width="80" height="80" alt="">
                                 <div class="media-body">
-                                    <h3 class="mb-0"><?php echo $_SESSION['user_firstname'] . " " . $_SESSION['user_lastname']; ?></h3>
+                                    <h3 class="mb-0"><?php echo $user->username; ?></h3>
                                 </div>
                             </div>
 
@@ -101,9 +113,9 @@ if(!isset($_SESSION["user_id"]))
                             </div>
 
                             <h4>Status</h4>
-                            <p class="text-muted">Hi, I'm Pikamy, has been the industry standard dummy text ever since the 1500s.</p>
+                            <p class="text-muted"><?php echo $user->user_status; ?></p>
                             <ul class="card-profile__info">
-                                <li><strong class="text-dark mr-4">Email</strong> <span>name@domain.com</span></li>
+                                <li><strong class="text-dark mr-4">Email</strong> <span><?php echo $user->user_email; ?></span></li>
                             </ul>
                         </div>
                     </div>
