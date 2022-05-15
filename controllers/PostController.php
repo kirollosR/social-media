@@ -3,7 +3,6 @@ require_once '../../models/post.php';
 require_once '../../controllers/DBController.php';
 
 
-
 class PostController
 {
     protected $db;
@@ -25,10 +24,29 @@ class PostController
             settype($post->topic_id,'integer');
             $query="insert into posts (user_id, topic_id, post_score, post_data, post_likes)
                     values ($post->user_id , $post->topic_id , $post->post_score , '$post->post_data' , $post->post_likes )";
-           return $this->db->insert($query);
+            return $this->db->insert($query);
         }
         else {
             echo "Error in DataBase connection";
+            return false;
+        }
+    }
+
+    public function getAllPosts() {
+        $this->db=new DBController;
+        if($this->db->openConnection())
+        {
+            $query="select post_id, username, post_score, post_data, post_likes, topic_name, user_profile
+                    from posts
+                    INNER JOIN users
+                    ON posts.user_id = users.user_id
+                    INNER JOIN topics
+                    ON topics.topic_id = posts.topic_id";
+            return $this->db->select($query);
+        }
+        else
+        {
+            echo "Error in Database Connection";
             return false;
         }
     }
@@ -47,48 +65,52 @@ class PostController
 //        }
 //    }
 
-        public function getAllCommentsScore($post_id) {
-        $this->db = new DBController;
+    //*************************
+    //***POST RANK FUNCTIONS***
+    //*************************
 
-        if($this->db->openConnection()){
-            $query = "SELECT comment_score
-                      FROM comments";
-            return $this->db->select($query);
-        }else{
-            echo "Error in DataBase connection";
-            return false;
-        }
-    }
-
-    public function postScore($post_id) {
-        $commentsScore = $this->getAllCommentsScore($post_id);
-
-        foreach($commentsScore as $comment) {
-            $score += $comment;
-            $count++;
-        }
-        $avg = $score / $count;
-        return $avg;
-
-        //TODO: update in database code
-    }
-
-    public function postRank($post_id) {
-        $postScore = $this->postScore($post_id);
-
-        if($postScore > 0 && $postScore <= 2) {
-            echo "Very Negative";
-        }elseif($postScore > 2 && $postScore <= 4) {
-            echo "Negative";
-        }elseif($postScore > 4 && $postScore <= 6) {
-            echo "Neutral";
-        }elseif($postScore > 6 && $postScore <= 8) {
-            echo "Positive";
-        }else{
-            echo "Very Positive";
-        }
-    }
+//        public function getAllCommentsScore($post_id) {
+//        $this->db = new DBController;
+//
+//        if($this->db->openConnection()){
+//            $query = "SELECT comment_score
+//                      FROM comments";
+//            return $this->db->select($query);
+//        }else{
+//            echo "Error in DataBase connection";
+//            return false;
+//        }
+//    }
+//
+//    public function postScore($post_id) {
+//        $commentsScore = $this->getAllCommentsScore($post_id);
+//
+//        foreach($commentsScore as $comment) {
+//            $score += $comment;
+//            $count++;
+//        }
+//        $avg = $score / $count;
+//        return $avg;
+//
+//        //TODO: update in database code
+//    }
+//
+//    public function postRank($post_id) {
+//        $postScore = $this->postScore($post_id);
+//
+//        if($postScore > 0 && $postScore <= 2) {
+//            echo "Very Negative";
+//        }elseif($postScore > 2 && $postScore <= 4) {
+//            echo "Negative";
+//        }elseif($postScore > 4 && $postScore <= 6) {
+//            echo "Neutral";
+//        }elseif($postScore > 6 && $postScore <= 8) {
+//            echo "Positive";
+//        }else{
+//            echo "Very Positive";
+//        }
+//    }
 
 }
-   
-?> 
+
+?>

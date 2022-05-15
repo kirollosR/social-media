@@ -1,3 +1,13 @@
+<?php
+require_once '../../controllers/PostController.php';
+require_once '../../models/Post.php';
+$PostController=new PostController;
+
+$errMsg = "";
+session_start();
+$posts = $PostController->getAllPosts();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,25 +103,42 @@
 <!--                    </form>-->
 <!--                </div>-->
 <!--            </div>-->
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="media media-reply">
-                            <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <div class="d-sm-flex justify-content-between mb-2">
-                                    <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">Topic name</small></h5>
-                                    <div class="media-reply__link">
-                                        <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                        <button class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php'">Comment</button>
+            <?php
+            if (count($posts) == 0)
+            {
+                ?>
+                <div class="alert alert-danger alert-dismissible fade show">There is no Topics yet</div>
+                <?php
+            }
+            else
+            {
+            ?>
+                <?php
+                foreach ($posts as $post) {
+                ?>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media media-reply">
+                                <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <div class="d-sm-flex justify-content-between mb-2">
+                                        <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>
+                                        <div class="media-reply__link">
+                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                            <button class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php'">Comment</button>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                    <p><?php echo $post["post_data"] ?></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php
+                }
+            }
+                ?>
+
 
         </div>
         <!-- #/ container -->

@@ -1,3 +1,36 @@
+<?php
+require_once '../../controllers/PostController.php';
+require_once '../../models/Post.php';
+$PostController=new PostController;
+
+$errorMsg="";
+
+if(!isset($_SESSION['user_id'])){
+    session_start();
+}
+
+if(isset($_POST['addPost'])){
+    if(!empty($_POST['addPost']))
+    {
+        $post=new post;
+        $post->post_data = $_POST['addPost'];
+        $post->user_id = $_SESSION['user_id'];
+        $post->topic_id = $_GET['id'];
+        $post->post_likes = 0;
+
+        if($PostController->AddPost($post))
+        {
+            header("location: topicFeed.php");
+        }
+        else {
+            $errorMsg="Something Went Wrong... Try Again";
+        }
+    }else {
+        $errorMsg = "Please fill all fields";
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,32 +100,32 @@
         <!-- row -->
 
         <div class="container-fluid">
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="#" class="form-profile">
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="addPost" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <ul class="mb-0 form-profile__icons">
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
-                                            </li>
-                                            <li class="d-inline-block">
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
-                                            </li>
-                                        </ul>
-                                        <button class="btn btn-primary px-3 ml-4">Send</button>
-                                    </div>
-                                </form>
-                            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form action="topicFeed.php" class="form-profile" method="POST">
+                        <div class="form-group">
+                            <textarea class="form-control" name="addPost" id="addPost" cols="30" rows="2" placeholder="Post a new message"></textarea>
                         </div>
+                        <div class="d-flex align-items-center">
+                            <ul class="mb-0 form-profile__icons">
+                                <li class="d-inline-block">
+                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
+                                </li>
+                                <li class="d-inline-block">
+                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
+                                </li>
+                                <li class="d-inline-block">
+                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
+                                </li>
+                                <li class="d-inline-block">
+                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary px-3 ml-4" type="submit">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <div class="card">
                 <div class="card-body">
@@ -108,6 +141,10 @@
                             </div>
 
                             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                            <form method="post" action="topicFeed.php">
+                                <input type="hidden" name="productId" value="<?php echo $post["post_id"]; ?>">
+                                <button class="btn btn-transparent p-0 mr-3"><i class="ti-trash" type="submit"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>

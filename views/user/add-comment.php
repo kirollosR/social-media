@@ -158,29 +158,29 @@ $comments = $Comment->getComments();
                                         <li class="d-inline-block"><img class="rounded" width="60" height="60" src="../../images/imgs/1.png" alt=""></li>
                                     </ul> -->
 
-                                    <div class="media mt-3">
-                                        <img class="mr-3 circle-rounded circle-rounded" src="../../assets/images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
-                                        <div class="media-body">
+
                                             <?php 
                                             foreach($comments as $comment){
                                                 ?>
-
-                                                <div class="d-sm-flex justify-content-between mb-2">
-                                                    <h5 class="mb-sm-0">
-                                                    <?php 
-                                                        $username = $Comment->getUsername($comment['user_id']);
-                                                        echo $username; 
-                                                    ?>
-                                                    <small class="text-muted ml-3"><?php echo $comment['comment_date']?></small></h5>
+                                            <div class="media mt-3">
+                                                <img class="mr-3 circle-rounded circle-rounded" src="../../assets/images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                        <div class="d-sm-flex justify-content-between mb-2">
+                                                            <h5 class="mb-sm-0">
+                                                            <?php
+                                                                $username = $Comment->getUsername($comment['user_id']);
+                                                                echo $username;
+                                                            ?>
+                                                            <small class="text-muted ml-3"><?php echo $comment['comment_date']?></small></h5>
+                                                        </div>
+                                                        <p><?php echo $comment['comment_data']?></p>
                                                 </div>
-                                                <p><?php echo $comment['comment_data']?></p>
-                                                </div>
-
+                                            </div>
                                                 <?php
                                             }
                                             
                                             ?>
-                                    </div>
+
                                     <div class="card">
                                     <div class="card-body">
                                         <form action="#" class="form-profile">

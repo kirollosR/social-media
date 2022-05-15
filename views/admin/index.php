@@ -5,6 +5,8 @@
           $systemController=new SystemController;
              $_usersNum=$systemController->getNumberOfUsers();
              $_postsNum=$systemController->getNumberOfPosts();
+             $_number_of_good_posts=$systemController->getNumberOfGoodPosts();
+             $_number_of_bad_posts=$systemController->getNumberOfBadPosts();
              ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,41 +73,11 @@
                         <div class="card-body">
                             <h3 class="card-title text-white">Number of Users</h3>
                             <div class="d-inline-block">
-                                
-                             
-                       
-                        <?php
+                             <!--********   php code ***************-->
+                             <h2 class="text-white" > 
+                                  <?php    echo    $_usersNum[0]["count"];    ?>  
+                                   </h2>
 
-   //   echo    array_values($_usersNum);
-              //  $query= "select * from users ";
-             //   $query_run=mysqli_query(  $this->db->connection, $query);
-                       
-                 //      if (  $usersNum=mysqli_num_rows($query_run))
-                         //   {       echo '<h2 class="text-white" > '   . $usersNum .  '</h2> ' ; }
-
-                        //    else 
-                          //  {     echo '<h2 class="text-white" >   No Data   </h2> ' ; }
-
-                         //    $usersNum=mysqli_num_rows($result)
-                           
-                    //echo $usersNum; 
-                             //   $usersNum=mysqli_num_rows($result);   
-                             ?> 
-
-              
-            
-                    <h2 class="text-white" >  
-                    <?php    echo    $_usersNum[0]["count"];
-                 
-              //  print_r ($_usersNum );
-           // echo mysql_fetch_array($_usersNum);
-          // echo ($x_value[0][0]);    
-                         ?>  
-             </h2>
-           
-      
-                              
-                         
                                 <p class="text-white mb-0">Users</p> 
                             </div>
                             <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
@@ -119,9 +91,9 @@
                             <div class="d-inline-block">
                                
 
-                                
-                                <h2 class="text-white" >    300 </h2>
-
+                               <h2 class="text-white" >     <?php  
+                                echo  $_postsNum[0]["NumberOfPosts"];?>  </h2>
+                                   
 
 
                                 <p class="text-white mb-0">Posts</p>
@@ -135,7 +107,9 @@
                         <div class="card-body">
                             <h3 class="card-title text-white">Number of Good Posts</h3>
                             <div class="d-inline-block">
-                                <h2 class="text-white">12</h2>
+                            <h2 class="text-white" >     <?php  
+                                echo  $_number_of_good_posts[0]["NumberOfGoodPosts"];?>  </h2>
+
                                 <p class="text-white mb-0">Posts</p>
                             </div>
                             <span class="float-right display-5 opacity-5"><i class="fa fa-thumbs-up"></i></span>
@@ -147,7 +121,8 @@
                         <div class="card-body">
                             <h3 class="card-title text-white">Number of Bad Posts</h3>
                             <div class="d-inline-block">
-                                <h2 class="text-white">3</h2>
+                            <h2 class="text-white" >     <?php  
+                                echo  $_number_of_bad_posts[0]["NumberOfBadPosts"];?>  </h2>
                                 <p class="text-white mb-0">Posts</p>
                             </div>
                             <span class="float-right display-5 opacity-5"><i class="fa fa-thumbs-down"></i></span>
