@@ -5,6 +5,7 @@ if(!isset($_SESSION["user_id"]))
 }
 
 require_once '../../models/user.php';
+require_once '../../controllers/PostController.php';
 
 $user = new user;
 
@@ -14,6 +15,8 @@ $user->user_email = $_SESSION['user_email'];
 $user->user_profile = $_SESSION['user_profile'];
 $user->user_status = $_SESSION['user_status'];
 
+$postController = new PostController;
+$posts = $postController->getAllPostsByUserId($user);
 
 ?>
 
@@ -91,18 +94,8 @@ $user->user_status = $_SESSION['user_status'];
 
                             <div class="row mb-5">
                                 <div class="col">
-                                    <!-- <div class="card card-profile text-center">
-                                        <span class="mb-1 text-primary"><i class="icon-people"></i></span>
-                                        <h3 class="mb-0">263</h3>
-                                        <p class="text-muted px-4">Following</p>
-                                    </div> -->
                                 </div>
                                 <div class="col">
-                                    <!-- <div class="card card-profile text-center">
-                                        <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
-                                        <h3 class="mb-0">263</h3>
-                                        <p class="text-muted">Followers</p>
-                                    </div> -->
                                 </div>
                                 <div class="col-12 text-center">
                                     <button type="button" class="btn mb-1 btn-outline-danger px-5" onclick="window.location.href='updateProfile.php'">Update Profile</button>
@@ -120,115 +113,43 @@ $user->user_status = $_SESSION['user_status'];
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-lg-8 col-xl-9">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="#" class="form-profile">
-                                <div class="form-group">
-                                    <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <ul class="mb-0 form-profile__icons">
-                                        <li class="d-inline-block">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary px-3 ml-4">Send</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div> -->
                 
-                <div class="col-lg-8 col-xl-9">
+                <?php
+            if (count($posts) == 0)
+            {
+                ?>
+                <div class="alert alert-danger alert-dismissible fade show">No posts found.</div>
+                <?php
+            }
+            else
+            {
+            ?>
+                <?php
+                foreach ($posts as $post) {
+                ?>
                     <div class="card">
                         <div class="card-body">
                             <div class="media media-reply">
                                 <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
+                                        <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>
                                         <div class="media-reply__link">
                                             <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                            <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2" onclick="window.location.href='add-comment.php'">Comment</button>
+                                            <button class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php'">Comment</button>
                                         </div>
                                     </div>
 
-                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                    <!-- <ul>
-                                        <li class="d-inline-block"><img class="rounded" width="60" height="60" src="../../images/imgs/2.png" alt=""></li>
-                                        <li class="d-inline-block"><img class="rounded" width="60" height="60" src="../../images/imgs/3.png" alt=""></li>
-                                        <li class="d-inline-block"><img class="rounded" width="60" height="60" src="../../images/imgs/4.png" alt=""></li>
-                                        <li class="d-inline-block"><img class="rounded" width="60" height="60" src="../../images/imgs/1.png" alt=""></li>
-                                    </ul> -->
-
-                                    <!-- <div class="media mt-3">
-                                        <img class="mr-3 circle-rounded circle-rounded" src="../../assets/images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <div class="d-sm-flex justify-content-between mb-2">
-                                                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                                <div class="media-reply__link">
-                                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                                    <button class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php'">Comment</button>
-                                                </div>
-                                            </div>
-                                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                        </div>
-                                    </div> -->
+                                    <p><?php echo $post["post_data"] ?></p>
                                 </div>
                             </div>
-
-                            <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                        <div class="media-reply__link">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                            <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Comment</button>
-                                        </div>
-                                    </div>
-
-                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                </div>
-                            </div>
-                            <div class="card">
-<!--                        <div class="card-body">-->
-<!--                            <form action="#" class="form-profile">-->
-<!--                                <div class="form-group">-->
-<!--                                    <textarea class="form-control" name="textarea" id="textarea" cols="30" rows="2" placeholder="Post a new message"></textarea>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex align-items-center">-->
-<!--                                    <ul class="mb-0 form-profile__icons">-->
-<!--                                        <li class="d-inline-block">-->
-<!--                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>-->
-<!--                                        </li>-->
-<!--                                        <li class="d-inline-block">-->
-<!--                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>-->
-<!--                                        </li>-->
-<!--                                        <li class="d-inline-block">-->
-<!--                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>-->
-<!--                                        </li>-->
-<!--                                        <li class="d-inline-block">-->
-<!--                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>-->
-<!--                                        </li>-->
-<!--                                    </ul>-->
-<!--                                    <button class="btn btn-primary px-3 ml-4">Send</button>-->
-<!--                                </div>-->
-<!--                            </form>-->
-<!--                        </div>-->
-                    
                         </div>
                     </div>
-                </div>
+                <?php
+                }
+            }
+                ?>
+
                 </div>
             </div>
         </div>

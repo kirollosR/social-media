@@ -17,6 +17,7 @@ $user->user_profile = $_SESSION['user_profile'];
 $user->user_status = $_SESSION['user_status'];
 
 
+
 if(isset($_POST['status']))
 {
     if(!empty($_POST['status']))
