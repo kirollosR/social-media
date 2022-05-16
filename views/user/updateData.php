@@ -1,6 +1,9 @@
 <?php
 require_once '../../models/user.php';
 require_once '../../controllers/UserController.php';
+@require_once '../../controllers/AuthController.php';
+
+$auth = new AuthController;
 
 if(!isset($_SESSION["user_id"]))
 {
@@ -9,7 +12,7 @@ if(!isset($_SESSION["user_id"]))
 
 $userController = new userController();
 
-$errMsg = "";
+$errorMsg = "";
 $user = new user;
 
 
@@ -22,17 +25,27 @@ $user->user_email = $_SESSION['user_email'];
 if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_POST['user_email']) && isset($_POST['username']) && isset($_POST['password'])){
     if(!empty($_POST['user_firstname']) && !empty($_POST['user_lastname']) && !empty($_POST['user_email']) && !empty($_POST['username']) && !empty($_POST['password'])) {
 
-        $user->username = $_POST['username'];
-        $user->user_firstname = $_POST['user_firstname'];
-        $user->user_lastname = $_POST['user_lastname'];
-        $user->user_email = $_POST['user_email'];
-        $user->password = $_POST['password'];
+        $errorMsg = $userController->checkEmail($_POST['user_email'],$_SESSION["user_id"]);
+        if($errorMsg == "") {
+            $errorMsg = $userController->checkUsername($_POST['username'],$_SESSION["user_id"]);
+            if($errorMsg == "") {
+                $errorMsg = $auth->checkPassword($_POST['password']);
+            }
+        }
+        if ($errorMsg != "") {
 
-        if($userController->updateData($user)){
-            header("location: updateData.php");
-        }else
-        {
-            $errMsg="Something Went Wrong... Try Again";
+        } else {
+            $user->username = $_POST['username'];
+            $user->user_firstname = $_POST['user_firstname'];
+            $user->user_lastname = $_POST['user_lastname'];
+            $user->user_email = $_POST['user_email'];
+            $user->password = $_POST['password'];
+
+            if ($userController->updateData($user)) {
+                header("location: updateData.php");
+            } else {
+                $errMsg = "Something Went Wrong... Try Again";
+            }
         }
     }
 }
@@ -110,6 +123,17 @@ if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Update profile data</h4>
+                        <?php
+                        if($errorMsg != ""){
+                            ?>
+                            <br>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <?php echo $errorMsg; ?>
+                            </div>
+                            <?php
+                        }
+                        ?>
                         <div class="basic-form">
                             <form method="post" action="updateData.php">
                                 <div class="form-row">

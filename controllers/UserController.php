@@ -64,6 +64,42 @@ class userController
             return false;
         }
     }
+
+    public function checkUsername($username,$user_id) {
+        $this->db = new DBController;
+
+        if($this->db->openConnection()){
+            $query = "SELECT username FROM users
+                      WHERE username='$username' AND NOT user_id = $user_id";
+            $result = $this->db->select($query);
+            if(count($result)!=0){
+                return "That username is taken. Try another.";
+            }else{
+                return "";
+            }
+        }else{
+            echo "Error in DataBase connection";
+            return false;
+        }
+    }
+
+    public function checkEmail($email,$user_id) {
+        $this->db = new DBController;
+
+        if($this->db->openConnection()){
+            $query = "SELECT username FROM users
+                      WHERE user_email = '$email' AND NOT user_id = $user_id";
+            $result = $this->db->select($query);
+            if(count($result) != 0){
+                return "This email is already in use. Please use another one.";
+            }else{
+                return "";
+            }
+        }else{
+            echo "Error in DataBase connection";
+            return false;
+        }
+    }
 } 
 
 ?> 
