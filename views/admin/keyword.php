@@ -89,7 +89,7 @@ $keywords = $keywordController->getAllKeywords();
                         if (count($keywords) == 0)
                         {
                             ?>
-                            <div class="alert alert-danger alert-dismissible fade show">There is no Topics yet</div>
+                            <div class="alert alert-danger alert-dismissible fade show col-lg-3">There is no Topics yet</div>
                             <?php
                         }
                         else
