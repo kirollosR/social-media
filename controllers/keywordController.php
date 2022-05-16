@@ -42,5 +42,20 @@ class keywordController
             return false;
         }
     }
+
+    public function deleteKeyword($keyword_id)
+    {
+        $this->db=new DBController;
+        if($this->db->openConnection())
+        {
+            $query="delete from keywords where keyword_id = $keyword_id";
+            return $this->db->delete($query);
+        }
+        else
+        {
+            echo "Error in Database Connection";
+            return false;
+        }
+    }
 }   
 ?> 

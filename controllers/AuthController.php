@@ -44,6 +44,7 @@ class AuthController
                     $_SESSION['role_id'] = $result[0]["role_id"];
                     $_SESSION['user_profile'] = $result[0]["user_profile"];
                     $_SESSION['user_status'] = $result[0]["user_status"];
+                    $_SESSION['password'] = $result[0]["password"];
                     $this->db->closeConnection();
                     return true;
                 }

@@ -37,6 +37,33 @@ class userController
             return false;
         }
     }
+
+    public function updateData(user $user) {
+        $this->db=new DBController;
+        if($this->db->openConnection())
+        {
+            $query="update users set username = '$user->username', user_firstname = '$user->user_firstname',
+                                     user_lastname = '$user->user_lastname', user_email = '$user->user_email',
+                                     password = '$user->password'
+                    where user_id = $user->user_id";
+            return $this->db->update($query);
+        }
+        else {
+            echo "Error in DataBase connection";
+            return false;
+        }
+    }
+
+    public function getUserData($user_id) {
+        $this->db = new DBController;
+        if ($this->db->openConnection()) {
+            $query = "SELECT * FROM users WHERE user_id = '$user_id'";
+            return $this->db->select($query);
+        } else {
+            echo "Error Connecting to the database";
+            return false;
+        }
+    }
 } 
 
 ?> 

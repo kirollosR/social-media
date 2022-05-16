@@ -1,3 +1,42 @@
+<?php
+require_once '../../models/user.php';
+require_once '../../controllers/UserController.php';
+
+if(!isset($_SESSION["user_id"]))
+{
+    session_start();
+}
+
+$userController = new userController();
+
+$errMsg = "";
+$user = new user;
+
+
+$user->user_id = $_SESSION["user_id"];
+$user->username = $_SESSION['username'];
+$user->user_firstname = $_SESSION['user_firstname'];
+$user->user_lastname = $_SESSION['user_lastname'];
+$user->user_email = $_SESSION['user_email'];
+
+if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_POST['user_email']) && isset($_POST['username']) && isset($_POST['password'])){
+    if(!empty($_POST['user_firstname']) && !empty($_POST['user_lastname']) && !empty($_POST['user_email']) && !empty($_POST['username']) && !empty($_POST['password'])) {
+
+        $user->username = $_POST['username'];
+        $user->user_firstname = $_POST['user_firstname'];
+        $user->user_lastname = $_POST['user_lastname'];
+        $user->user_email = $_POST['user_email'];
+        $user->password = $_POST['password'];
+
+        if($userController->updateData($user)){
+            header("location: updateData.php");
+        }else
+        {
+            $errMsg="Something Went Wrong... Try Again";
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,30 +111,30 @@
                     <div class="card-body">
                         <h4 class="card-title">Update profile data</h4>
                         <div class="basic-form">
-                            <form>
+                            <form method="post" action="updateData.php">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" value="First Name">
+                                        <input type="text" id="user_firstname" name="user_firstname" class="form-control" value="<?php echo $_SESSION['user_firstname']; ?>">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" value="First Name">
+                                        <input type="text" id="user_lastname" name="user_lastname" class="form-control" value="<?php echo $_SESSION['user_lastname']; ?>">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" value="Email">
+                                        <input type="email" id="user_email" name="user_email" class="form-control" value="<?php echo $_SESSION['user_email']; ?>">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Password</label>
-                                        <input type="password" class="form-control" value="Password">
+                                        <input type="password" id="password" name="password" class="form-control" value="<?php echo $_SESSION['password']; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>UserName</label>
-                                    <input type="text" class="form-control" value="k33_0">
+                                    <input type="text" id="username" name="username" class="form-control" value="<?php echo $_SESSION['username']; ?>">
                                 </div>
 <!--                                <div class="form-group">-->
 <!--                                    <label>State</label>-->

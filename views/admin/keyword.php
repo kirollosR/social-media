@@ -5,7 +5,18 @@ require_once '../../controllers/keywordController.php';
 $keywordController = new KeywordController;
 $keywords = $keywordController->getAllKeywords();
 
-
+if(isset($_POST['delete']))
+{
+    if(!empty($_POST['keyword_id']))
+    {
+        $keyword = new keyword;
+        if($keywordController->deleteKeyword($_POST["keyword_id"]))
+        {
+            $dltMsg = true;
+            $keywords = $keywordController->getAllKeywords();
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -151,9 +162,9 @@ $keywords = $keywordController->getAllKeywords();
     <!--                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>-->
     <!--                                            <a type="submit" href="#" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a>-->
                                                 <form action="keyword.php" method="post">
-                                                    <input type="hidden" name="productId" value="<?php echo $keyword["keyword_id"]; ?>">
+                                                    <input type="hidden" name="keyword_id" value="<?php echo $keyword["keyword_id"]; ?>">
                                                     <button type="button" class="btn mb-1 btn-rounded btn-outline-info" onclick="window.location.href='editKeyword.php'"><span class="fa fa-pencil color-muted m-r-5"></span></button>
-                                                    <button type="button" class="btn mb-1 btn-rounded btn-outline-danger"><span class="ti-trash"></span></button>
+                                                    <button type="submit" name="delete" class="btn mb-1 btn-rounded btn-outline-danger"><span class="ti-trash"></span></button>
                                                 </form>
                                             </span>
                                         </td>
