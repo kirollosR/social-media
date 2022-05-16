@@ -27,10 +27,11 @@ class commentController{
         }
     }
 
-    public function getComments(){
+    public function getComments($post_id){
         $this->db = new DBController;
         if ($this->db->openConnection()) {
-            $query = "SELECT * FROM comments";
+            $query = "SELECT * FROM comments
+                      WHERE post_id = $post_id";
             return $this->db->select($query);
         } else {
             echo "Error Connecting to the database";
@@ -87,8 +88,11 @@ class commentController{
                     $counter++;
                 }
             }
-            $comment_score = $word_score / $counter;
-            echo $comment_score;
+            if($counter == 0){
+                $comment_score = 0;
+            }else{
+                $comment_score = $word_score / $counter;
+            }
             return $comment_score;
         } else {
             echo "Error Connecting to the database";

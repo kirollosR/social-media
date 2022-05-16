@@ -1,8 +1,28 @@
 <?php
 //extends Com_Controller & Comment files
 require_once '../../controllers/commentController.php';
-
 $Comment_Controller=new commentController();
+
+require_once '../../controllers/UserController.php';
+$userController = new UserController;
+
+require_once '../../models/comment.php';
+$Comment = new Comment;
+
+require_once '../../controllers/PostController.php';
+$postController = new PostController;
+
+if(isset($_GET['id'])){
+    if(!empty($_GET['id'])){
+        $posts = $postController->getPost($_GET['id']);
+    }else
+    {
+        header("location: index.php");
+    }
+}else
+{
+    header("location: index.php");
+}
 
 if(!isset($_SESSION['user_id'])){
     session_start();
@@ -14,8 +34,8 @@ $errorMsg = "";
     if(!empty($_POST['comment_data']) ){
         $comment=new comment;
         $comment->user_id=$_SESSION['user_id'];
-        $comment->topic_id=2;
-        $comment->post_id=1;
+        $comment->topic_id=8;
+        $comment->post_id=$_GET['id'];
         $comment->comment_score= $Comment_Controller->commentsRank($_POST['comment_data']);
         $comment->comment_data=$_POST['comment_data'];
 
@@ -32,12 +52,12 @@ $errorMsg = "";
     }
  }
  
- $comments = $Comment_Controller->getComments();
+ $comments = $Comment_Controller->getComments($_GET['id']);
 
  if( isset($_POST['deleteComment'])){
     if(!empty($_POST['comment_id'])){
         if($Comment_Controller->deleteComment($_POST['comment_id'])){
-            $comments = $Comment_Controller->getComments();
+            $comments = $Comment_Controller->getComments($_GET['id']);
         }
     }
  }
@@ -112,18 +132,22 @@ $errorMsg = "";
                     <div class="card">
                         <div class="card-body">
                             <div class="media media-reply">
+                                <?php
+                                foreach ($posts as $post) {
+                                ?>
                                 <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
+                                        <h5 class="mb-sm-0"><?php echo $post['username']; ?><small class="text-muted ml-3"><?php echo $post['topic_name']; ?></small></h5>
                                         <div class="media-reply__link">
-                                            
-                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
                                             <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Comment</button>
                                         </div>
                                     </div>
-
-                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                    <p style="font-size: medium;"><?php echo $post['post_data']; ?></p>
+                                    <?php
+                                    }
+                                    ?>
                                     <?php 
                                             foreach($comments as $comment){
                                                 ?>
@@ -153,7 +177,7 @@ $errorMsg = "";
                                             ?>
                                     <div class="card">
                                     <div class="card-body">
-                                        <form action="#" class="form-profile" method="POST">
+                                        <form action="" class="form-profile" method="POST">
                                             <div class="form-group">
                                                 <textarea class="form-control" name="comment_data" id="comment_data" cols="30" rows="2" placeholder="Write a comment..."></textarea>
                                             </div>
