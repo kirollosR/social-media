@@ -25,6 +25,18 @@ class userController
             return false;
         }
     }
+
+    public function getUsername($user_id){
+        $this->db = new DBController;
+        if ($this->db->openConnection()) {
+            $query = 'SELECT username FROM users WHERE user_id = '. $user_id .'';
+            $username =  $this->db->select($query);
+            return $username[0]['username'];
+        } else {
+            echo "Error Connecting to the database";
+            return false;
+        }
+    }
 } 
 
 ?> 

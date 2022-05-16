@@ -127,47 +127,48 @@ if(isset($_POST['delete']))
                 </div>
                 
                 <?php
-            if (count($posts) == 0)
-            {
-                ?>
-                <div class="alert alert-danger alert-dismissible fade show">No posts found.</div>
-                <?php
-            }
-            else
-            {
-            ?>
-                <div class="col-lg-8 col-xl-9">
-                    <div class="card">
-                        <div class="card-body">
-                    <?php
-                    foreach ($posts as $post) {
+                if (count($posts) == 0)
+                {
                     ?>
-                                <div class="media media-reply">
-                                    <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <div class="d-sm-flex justify-content-between mb-2">
-                                            <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>
-                                            <div class="media-reply__link">
-                                                <form method="POST" action="profile.php">
-                                                        <span>
-                                                            <input type="hidden" name="post_id" value="<?php echo $post["post_id"]; ?>">
-                                                            <button type="button" class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                                            <button class="btn btn-transparent p-0 mr-3" type="submit" name="delete"><i class="ti-trash"></i></button>
-                                                            <button type="button" class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php'">Comment</button>
-                                                        </span>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <p><?php echo $post["post_data"] ?></p>
-                                    </div>
-                                </div>
+                    <div class="alert alert-danger alert-dismissible fade show">No posts found.</div>
                     <?php
-                    }
                 }
-                    ?>
-                        </div>
+                else
+                {
+                ?>
+                    <div class="col-lg-8 col-xl-9">
+                        <div class="card">
+                            <div class="card-body">
+                        <?php
+                        foreach ($posts as $post) {
+                        ?>
+                                    <div class="media media-reply">
+                                        <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <div class="d-sm-flex justify-content-between mb-2">
+                                                <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>
+                                                <div class="media-reply__link">
+                                                    <form method="POST" action="profile.php">
+                                                            <span>
+                                                                <input type="hidden" name="post_id" value="<?php echo $post["post_id"]; ?>">
+                                                                <button type="button" class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                                                <button class="btn btn-transparent p-0 mr-3" type="submit" name="delete"><i class="ti-trash"></i></button>
+                                                                <button type="button" class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php'">Comment</button>
+                                                            </span>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                            <p><?php echo $post["post_data"] ?></p>
+                                        </div>
+                                    </div>
+                        <?php
+                        }
+                    }
+                        ?>
+                    </div>
             </div>
+                    </div>
 
                 </div>
             </div>
