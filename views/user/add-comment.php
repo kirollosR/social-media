@@ -5,6 +5,25 @@ if(!isset($_SESSION["user_id"])){
 
 require_once '../../models/comment.php';
 $Comment = new Comment;
+
+require_once '../../controllers/UserController.php';
+$userController = new UserController;
+
+require_once '../../controllers/PostController.php';
+$postController = new PostController;
+
+if(isset($_GET['id'])){
+    if(!empty($_GET['id'])){
+        $posts = $postController->getPost($_GET['id']);
+    }else
+    {
+        header("location: index.php");
+    }
+}else
+{
+    header("location: index.php");
+}
+
 $comments = $Comment->getComments();
 ?>
 
@@ -140,17 +159,23 @@ $comments = $Comment->getComments();
                     <div class="card">
                         <div class="card-body">
                             <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                        <div class="media-reply__link">
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                            <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Comment</button>
+                                <?php
+                                foreach ($posts as $post) {
+                                ?>
+                                    <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <div class="d-sm-flex justify-content-between mb-2">
+                                            <h5 class="mb-sm-0"><?php echo $post['username']; ?><small class="text-muted ml-3"><?php echo $post['topic_name']; ?></small></h5>
+                                            <div class="media-reply__link">
+                                                <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                                <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Comment</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <p style="font-size: medium;"><?php echo $post['post_data']; ?></p>
+                                    <?php
+                                    }
+                                    ?>
 
-                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
                                     <!-- <ul>
                                         <li class="d-inline-block"><img class="rounded" width="60" height="60" src="../../images/imgs/2.png" alt=""></li>
                                         <li class="d-inline-block"><img class="rounded" width="60" height="60" src="../../images/imgs/3.png" alt=""></li>
@@ -168,7 +193,7 @@ $comments = $Comment->getComments();
                                                         <div class="d-sm-flex justify-content-between mb-2">
                                                             <h5 class="mb-sm-0">
                                                             <?php
-                                                                $username = $Comment->getUsername($comment['user_id']);
+                                                                $username = $userController->getUsername($comment['user_id']);
                                                                 echo $username;
                                                             ?>
                                                             <small class="text-muted ml-3"><?php echo $comment['comment_date']?></small></h5>
@@ -178,7 +203,7 @@ $comments = $Comment->getComments();
                                             </div>
                                                 <?php
                                             }
-                                            
+
                                             ?>
 
                                     <div class="card">
