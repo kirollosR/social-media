@@ -13,5 +13,4 @@ class Comment
     public $comment_data;
     public $comment_score;
     public $counter; // counts data
-    public $word_score; // keyword score in comment
 }

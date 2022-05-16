@@ -16,7 +16,7 @@ $errorMsg = "";
         $comment->user_id=$_SESSION['user_id'];
         $comment->topic_id=2;
         $comment->post_id=1;
-        $comment->comment_score=6;
+        $comment->comment_score= $Comment_Controller->commentsRank($_POST['comment_data']);
         $comment->comment_data=$_POST['comment_data'];
 
         if($Comment_Controller->addComment($comment)){

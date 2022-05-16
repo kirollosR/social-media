@@ -6,6 +6,8 @@ require_once '../../controllers/DBController.php';
 //create Comment_Controller
 class commentController{
     protected $db;
+    private $word_score = 0;
+    private $comment_score = 1.0;
 //1. Open connection
 //2. Run query
 //3. Close connection
@@ -78,13 +80,15 @@ class commentController{
         if ($this->db->openConnection()) {       
             $comment_array = explode(' ', $comment_data);
             foreach($comment_array as $word){
-                $query = 'SELECT keyword_score FROM keywords WHERE keyword_name = '. $word .' ';
+                $query = "SELECT keyword_score FROM keywords WHERE keyword_name = '$word' ";
                 if($this->db->select($query)){
-                    $word_score += $this->db->select($query);
+                    $wordArray = $this->db->select($query);
+                    $word_score += $wordArray[0]['keyword_score'];
                     $counter++;
                 }
             }
             $comment_score = $word_score / $counter;
+            echo $comment_score;
             return $comment_score;
         } else {
             echo "Error Connecting to the database";
