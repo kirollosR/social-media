@@ -1,5 +1,4 @@
 # social-media
-@@ -6,6 +6,8 @@ An Opinion Mining for Social Networking Application
 <br>
 
 ![image](https://user-images.githubusercontent.com/80947144/168744947-c4107bcb-5c2d-4590-a372-ef4afbfeb6d1.png)
