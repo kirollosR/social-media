@@ -23,10 +23,10 @@ if(isset($_POST['addPost'])){
             header("location: topicFeed.php");
         }
         else {
-            $errorMsg="Something Went Wrong... Try Again";
+            $errorMsg="Something Went Wrong... Try Again 1 " . $_GET['id'];
         }
     }else {
-        $errorMsg = "Please fill all fields";
+        $errorMsg = "Something Went Wrong... Try Again 2 " . $_GET['id'];
     }
 }
 
@@ -102,6 +102,17 @@ if(isset($_POST['addPost'])){
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
+                    <?php
+                    if($errorMsg != ""){
+                        ?>
+                        <br>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <?php echo $errorMsg; ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
                     <form action="topicFeed.php" class="form-profile" method="POST">
                         <div class="form-group">
                             <textarea class="form-control" name="addPost" id="addPost" cols="30" rows="2" placeholder="Post a new message"></textarea>

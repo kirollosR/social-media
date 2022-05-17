@@ -136,7 +136,8 @@ if(isset($_POST['delete']))
                                 <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
-                                        <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>
+                                        <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small><small class="text-muted ml-3"><?php echo $PostController->postRank($post["post_id"]); ?></small></h5>
+<!--                                        <h5 class="mb-sm-0"><small class="text-muted ml-3">--><?php //echo $PostController->postRank($post["post_id"]); ?><!--</small></h5>-->
                                         <div class="media-reply__link">
                                             <form method="POST" action="index.php">
                                                 <span>

@@ -54,16 +54,16 @@ class userController
         }
     }
 
-    public function getUserData($user_id) {
-        $this->db = new DBController;
-        if ($this->db->openConnection()) {
-            $query = "SELECT * FROM users WHERE user_id = '$user_id'";
-            return $this->db->select($query);
-        } else {
-            echo "Error Connecting to the database";
-            return false;
-        }
-    }
+//    public function getUserData($user_id) {
+//        $this->db = new DBController;
+//        if ($this->db->openConnection()) {
+//            $query = "SELECT * FROM users WHERE user_id = '$user_id'";
+//            return $this->db->select($query);
+//        } else {
+//            echo "Error Connecting to the database";
+//            return false;
+//        }
+//    }
 
     public function checkUsername($username,$user_id) {
         $this->db = new DBController;

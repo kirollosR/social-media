@@ -147,7 +147,7 @@ if(isset($_POST['delete']))
                                     if($errMsg != ""){
                                         ?>
                                         <br>
-                                        <div class="alert alert-danger alert-dismissible fade show">
+                                        <div class="alert alert-success alert-dismissible fade show">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                             <?php echo $errMsg; ?>
                                         </div>

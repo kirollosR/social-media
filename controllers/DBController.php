@@ -50,7 +50,7 @@ class DBController
     public function delete($query){
         $result = $this->connection->query($query);
         if(!$result){
-            echo "Error: " . mysqli_error($this->connection);
+            echo "Error : " . mysqli_error($this->connection);
             return false;
         }else{
             return $result;

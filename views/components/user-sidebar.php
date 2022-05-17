@@ -18,7 +18,7 @@ $topics = $topicController->getAllTopics();
                     foreach ($topics as $topic) {
                         ?>
                         <li>
-                            <a href="topicFeed.php?id=<?php echo $topic['topic_id'] ?>">
+                            <a href="topicFeed.php?id=<?php echo $topic['topic_id']; ?>">
                                 <div><?php echo $topic['topic_name'] ?></div>
                             </a>
                         </li>

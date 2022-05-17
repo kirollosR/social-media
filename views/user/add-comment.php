@@ -12,6 +12,7 @@ $Comment = new Comment;
 require_once '../../controllers/PostController.php';
 $postController = new PostController;
 
+
 if(isset($_GET['id'])){
     if(!empty($_GET['id'])){
         $posts = $postController->getPost($_GET['id']);
@@ -30,16 +31,18 @@ if(!isset($_SESSION['user_id'])){
 
 $errorMsg = "";
 
- if( isset($_POST['comment_data']) ){
+ if(isset($_POST['comment_data']) ){
     if(!empty($_POST['comment_data']) ){
         $comment=new comment;
         $comment->user_id=$_SESSION['user_id'];
-        $comment->topic_id=8;
+        $comment->topic_id=10;
         $comment->post_id=$_GET['id'];
         $comment->comment_score= $Comment_Controller->commentsRank($_POST['comment_data']);
+
         $comment->comment_data=$_POST['comment_data'];
 
         if($Comment_Controller->addComment($comment)){
+            $postController->postScore($_GET['id']);
             header("location: add-comment.php");
         }
         else{
@@ -57,6 +60,7 @@ $errorMsg = "";
  if( isset($_POST['deleteComment'])){
     if(!empty($_POST['comment_id'])){
         if($Comment_Controller->deleteComment($_POST['comment_id'])){
+            $postController->postScore($_GET['id']);
             $comments = $Comment_Controller->getComments($_GET['id']);
         }
     }
