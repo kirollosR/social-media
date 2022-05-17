@@ -1,14 +1,23 @@
 <?php
-require_once '../../models/user.php';
-require_once '../../controllers/UserController.php';
-@require_once '../../controllers/AuthController.php';
-
-$auth = new AuthController;
+require_once '../../controllers/AuthController.php';
+require_once '../../models/vars.php';
+$vars = new vars;
+$auth = new AuthController();
 
 if(!isset($_SESSION["user_id"]))
 {
     session_start();
 }
+
+if(!$auth->isAuthenticated($vars->user)){
+    header('Location: ../auth/page-login.php');
+}
+
+require_once '../../models/user.php';
+require_once '../../controllers/UserController.php';
+@require_once '../../controllers/AuthController.php';
+
+$auth = new AuthController;
 
 $userController = new userController();
 
@@ -135,7 +144,7 @@ if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_
                         }
                         ?>
                         <div class="basic-form">
-                            <form method="post" action="updateData.php">
+                            <form method="post" action="profile.php">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>First Name</label>

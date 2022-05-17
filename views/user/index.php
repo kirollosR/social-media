@@ -1,4 +1,16 @@
 <?php
+require_once '../../controllers/AuthController.php';
+require_once '../../models/vars.php';
+$vars = new vars;
+$auth = new AuthController();
+
+if(!isset($_SESSION['user_id'])){
+    session_start();
+}
+if(!$auth->isAuthenticated($vars->user)){
+    header('Location: ../auth/page-login.php');
+}
+
 require_once '../../controllers/PostController.php';
 require_once '../../models/post.php';
 $PostController=new PostController;

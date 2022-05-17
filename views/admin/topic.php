@@ -12,6 +12,14 @@ if(!isset($_SESSION['user_id'])){
     session_start();
 }
 
+require_once '../../controllers/AuthController.php';
+require_once '../../models/vars.php';
+$vars = new vars;
+$auth = new AuthController();
+if(!$auth->isAuthenticated($vars->admin)){
+    header('Location: ../auth/page-login.php');
+}
+
 $addMsg = false;
 
 if(isset($_POST['topic']))

@@ -161,7 +161,7 @@ class AuthController
     public function isAuthenticated($role_id){
         if(!isset($_SESSION["role_id"])){  //authentication
             return false;
-        }else if($_SESSION["role_id"]!= $role_id) { //authorization
+        }else if($_SESSION["role_id"] != $role_id) { //authorization
             return false;
         }else{
             return true;

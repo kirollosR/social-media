@@ -1,4 +1,16 @@
 <?php
+require_once '../../controllers/AuthController.php';
+require_once '../../models/vars.php';
+$vars = new vars;
+$auth = new AuthController();
+
+if(!isset($_SESSION['user_id'])){
+    session_start();
+}
+
+if(!$auth->isAuthenticated($vars->user)){
+    header('Location: ../auth/page-login.php');
+}
 //extends Com_Controller & Comment files
 require_once '../../controllers/commentController.php';
 $Comment_Controller=new commentController();
@@ -25,17 +37,15 @@ if(isset($_GET['id'])){
     header("location: index.php");
 }
 
-if(!isset($_SESSION['user_id'])){
-    session_start();
-}
 
 $errorMsg = "";
 
  if(isset($_POST['comment_data']) ){
     if(!empty($_POST['comment_data']) ){
+        $topic_id = $postController->getTopicId($_GET['id']);
         $comment=new comment;
         $comment->user_id=$_SESSION['user_id'];
-        $comment->topic_id=10;
+        $comment->topic_id=$topic_id[0]['topic_id'];
         $comment->post_id=$_GET['id'];
         $comment->comment_score= $Comment_Controller->commentsRank($_POST['comment_data']);
 

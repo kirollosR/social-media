@@ -78,6 +78,7 @@ class commentController{
 
     public function commentsRank($comment_data){
         $this->db = new DBController;
+        $counter = 0;
         if ($this->db->openConnection()) {       
             $comment_array = explode(' ', $comment_data);
             foreach($comment_array as $word){

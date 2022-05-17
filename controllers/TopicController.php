@@ -57,5 +57,19 @@ class TopicController
          }
     }
 
+    public function getTopicId($topic_id) {
+        $this->db=new DBController;
+        if($this->db->openConnection())
+        {
+            $query="select topic_id from topics
+                    where topic_id = $topic_id";
+            return $this->db->select($query);
+        }
+        else
+        {
+            echo "Error in Database Connection";
+            return false;
+        }
+    }
 }   
 ?> 

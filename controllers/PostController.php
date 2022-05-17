@@ -237,6 +237,20 @@ class PostController
         }
     }
 
+    public function getTopicId($post_id) {
+        $this->db = new DBController;
+
+        if($this->db->openConnection()){
+            $query = "SELECT topic_id
+                      FROM posts
+                      WHERE post_id = $post_id";
+            return $this->db->select($query);
+        }else{
+            echo "Error in DataBase connection";
+            return false;
+        }
+    }
+
 }
 
 ?>

@@ -1,17 +1,30 @@
 <?php
-require_once '../../controllers/PostController.php';
-require_once '../../models/Post.php';
-$PostController=new PostController;
-
-$errorMsg="";
+require_once '../../controllers/AuthController.php';
+require_once '../../models/vars.php';
+$vars = new vars;
+$auth = new AuthController();
 
 if(!isset($_SESSION['user_id'])){
     session_start();
 }
 
+if(!$auth->isAuthenticated($vars->user)){
+    header('Location: ../auth/page-login.php');
+}
+
+require_once '../../controllers/PostController.php';
+require_once '../../models/Post.php';
+$PostController=new PostController;
+
+require_once '../../controllers/TopicController.php';
+$topicController = new TopicController;
+
+$errorMsg="";
+
 if(isset($_POST['addPost'])){
     if(!empty($_POST['addPost']))
     {
+        $topic_id = $topicController->getTopicId($_GET['id']);
         $post=new post;
         $post->post_data = $_POST['addPost'];
         $post->user_id = $_SESSION['user_id'];
