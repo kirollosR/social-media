@@ -57,5 +57,20 @@ class keywordController
             return false;
         }
     }
+
+    public function updateKeyword($keyword_name,$keyword_score){
+        $this->db=new DBController;
+        if($this->db->openConnection())
+        {
+            $query="update keywords set keyword_score=$keyword_score
+                    where keyword_name = '$keyword_name'";
+            return $this->db->update($query);
+        }
+        else
+        {
+            echo "Error in Database Connection";
+            return false;
+        }
+    }
 }   
 ?> 

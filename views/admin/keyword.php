@@ -106,7 +106,8 @@ if(isset($_POST['delete']))
                     <div class="card-body">
                         <h4 class="card-title">Keywords
                             <?php //TODO: onclick="window.location.href='addKeyword.php'">Add keyword ?>
-                            <button type="button" class="btn mb-1 btn-primary" style="float: right;" onclick="window.location.href='addKeyword.php'">Add keyword<span class="btn-icon-right"><i class="fa fa-plus"></i></span>
+<!--                            <button type="button" class="btn mb-1 btn-rounded btn-outline-info" style="float: right;" onclick="window.location.href='editKeyword.php'">Edit keyword<span class="btn-icon-right"><i class="fa fa-pencil color-muted m-r-5"></i></span>-->
+                            <button type="button" class="btn mb-1 btn-rounded btn-outline-info" style="float: right; " onclick="window.location.href='addKeyword.php'">Add keyword<span class="btn-icon-right"><i class="fa fa-plus"></i></span>
                             </button>
                         </h4>
                         <?php
@@ -126,7 +127,7 @@ if(isset($_POST['delete']))
                                         <th scope="col">Word</th>
                                         <th scope="col">Weight</th>
                                         <th scope="col">Rate</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -174,10 +175,10 @@ if(isset($_POST['delete']))
                                         <td><span>
     <!--                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>-->
     <!--                                            <a type="submit" href="#" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a>-->
-                                                <form action="keyword.php" method="post">
+                                                <form action="" method="post">
                                                     <input type="hidden" name="keyword_id" value="<?php echo $keyword["keyword_id"]; ?>">
-                                                    <button type="button" class="btn mb-1 btn-rounded btn-outline-info" onclick="window.location.href='editKeyword.php'"><span class="fa fa-pencil color-muted m-r-5"></span></button>
-                                                    <button type="submit" name="delete" class="btn mb-1 btn-rounded btn-outline-danger"><span class="ti-trash"></span></button>
+                                                    <button type="button" class="btn mb-1 btn-rounded btn-outline-info" onclick="window.location.href='editKeyword.php?id=<?php echo $keyword["keyword_id"]; ?>&name=<?php echo $keyword["keyword_name"]; ?>'"><span class="fa fa-pencil color-muted m-r-5"></span></button>
+                                                    <button type="submit" name="delete" class="btn mb-1 btn-rounded btn-outline-danger" ><span class="ti-trash"></span></button>
                                                 </form>
                                             </span>
                                         </td>

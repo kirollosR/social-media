@@ -152,7 +152,7 @@ if(isset($_POST['delete']))
                         foreach ($posts as $post) {
                         ?>
                                     <div class="media media-reply">
-                                        <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                        <img class="mr-3 circle-rounded" src="../../assets/images/member/user.png"" width="50" height="50" alt="Generic placeholder image">
                                         <div class="media-body">
                                             <div class="d-sm-flex justify-content-between mb-2">
                                                 <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>

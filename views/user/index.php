@@ -145,17 +145,17 @@ if(isset($_POST['delete']))
                         ?>
 
                             <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                <img class="mr-3 circle-rounded" src="../../assets/images/member/user.png" width="50" height="50" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
                                         <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small><small class="text-muted ml-3"><?php echo $PostController->postRank($post["post_id"]); ?></small></h5>
 <!--                                        <h5 class="mb-sm-0"><small class="text-muted ml-3">--><?php //echo $PostController->postRank($post["post_id"]); ?><!--</small></h5>-->
-                                        <div class="media-reply__link">
+                                        <div class="media-reply-link">
                                             <form method="POST" action="index.php">
                                                 <span>
                                                     <input type="hidden" name="post_id" value="<?php echo $post["post_id"]; ?>">
-                                                    <button type="button" class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                                    <button class="btn btn-transparent p-0 mr-3" type="submit" name="delete"><i class="ti-trash"></i></button>
+<!--                                                    <button type="button" class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>-->
+<!--                                                    <button class="btn btn-transparent p-0 mr-3" type="submit" name="delete"><i class="ti-trash"></i></button>-->
                                                     <button type="button" class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php?id=<?php echo $post["post_id"]; ?>'">Comment</button>
                                                 </span>
                                             </form>

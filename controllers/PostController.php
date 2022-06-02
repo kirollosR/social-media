@@ -251,6 +251,26 @@ class PostController
         }
     }
 
+    public function getPostsByTopic($topic_id) {
+        $this->db=new DBController;
+        if($this->db->openConnection())
+        {
+            $query="select post_id, username, post_score, post_data, post_likes, topic_name, user_profile
+                    from posts
+                    INNER JOIN users
+                    ON posts.user_id = users.user_id
+                    INNER JOIN topics
+                    ON topics.topic_id = posts.topic_id
+                    AND posts.topic_id = $topic_id";
+            return $this->db->select($query);
+        }
+        else
+        {
+            echo "Error in Database Connection";
+            return false;
+        }
+    }
+
 }
 
 ?>

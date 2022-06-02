@@ -4,6 +4,20 @@ require_once '../../models/vars.php';
 $vars = new vars;
 $auth = new AuthController();
 
+require_once '../../controllers/PostController.php';
+require_once '../../models/Post.php';
+
+//$topic_id = $_GET['id'];
+//settype($topic_id,'integer');
+
+if(isset($_GET['id'])) {
+    $PostController = new PostController;
+    $posts = $PostController->getPostsByTopic($_GET['id']);
+}
+//TODO: I can't get the posts by topic id
+//TODO: it's done but still have conflict between get and post
+//get the topic to add post solved
+
 if(!isset($_SESSION['user_id'])){
     session_start();
 }
@@ -24,22 +38,22 @@ $errorMsg="";
 if(isset($_POST['addPost'])){
     if(!empty($_POST['addPost']))
     {
-        $topic_id = $topicController->getTopicId($_GET['id']);
+//        $topic_id = $topicController->getTopicId($_POST['topic_id']);
         $post=new post;
         $post->post_data = $_POST['addPost'];
         $post->user_id = $_SESSION['user_id'];
-        $post->topic_id = $_GET['id'];
+        $post->topic_id = $_POST['topic_id'];
         $post->post_likes = 0;
 
         if($PostController->AddPost($post))
         {
-            header("location: topicFeed.php");
+            header("location: topicFeed.php?id=".$_POST['topic_id']);
         }
         else {
-            $errorMsg="Something Went Wrong... Try Again 1 " . $_GET['id'];
+            $errorMsg="Something Went Wrong... Try Again";
         }
     }else {
-        $errorMsg = "Something Went Wrong... Try Again 2 " . $_GET['id'];
+        $errorMsg = "Something Went Wrong... Try Again";
     }
 }
 
@@ -125,54 +139,64 @@ if(isset($_POST['addPost'])){
                         </div>
                         <?php
                     }
+                    //TODO: how o go to the same page with the id in get ?
                     ?>
-                    <form action="topicFeed.php" class="form-profile" method="POST">
+                    <form action="" class="form-profile" method="POST">
                         <div class="form-group">
+                            <input type="hidden" name="topic_id" id="topic_id" value="<?php echo $_GET['id']; ?>">
                             <textarea class="form-control" name="addPost" id="addPost" cols="30" rows="2" placeholder="Post a new message"></textarea>
                         </div>
                         <div class="d-flex align-items-center">
-                            <ul class="mb-0 form-profile__icons">
-                                <li class="d-inline-block">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>
-                                </li>
-                                <li class="d-inline-block">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>
-                                </li>
-                                <li class="d-inline-block">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>
-                                </li>
-                                <li class="d-inline-block">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>
-                                </li>
-                            </ul>
-                            <button class="btn btn-primary px-3 ml-4" type="submit">Send</button>
+<!--                            <ul class="mb-0 form-profile__icons">-->
+<!--                                <li class="d-inline-block">-->
+<!--                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button>-->
+<!--                                </li>-->
+<!--                                <li class="d-inline-block">-->
+<!--                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-paper-plane"></i></button>-->
+<!--                                </li>-->
+<!--                                <li class="d-inline-block">-->
+<!--                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-camera"></i></button>-->
+<!--                                </li>-->
+<!--                                <li class="d-inline-block">-->
+<!--                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-smile"></i></button>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+                            <button class="btn btn-primary px-3 ml-4" type="submit">Post</button>
                         </div>
                     </form>
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-body">
+                    <?php
+                    foreach ($posts as $post) {
+                    ?>
+
                     <div class="media media-reply">
-                        <img class="mr-3 circle-rounded" src="../../assets/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                        <img class="mr-3 circle-rounded" src="../../assets/images/member/user.png" width="50" height="50" alt="Generic placeholder image">
                         <div class="media-body">
                             <div class="d-sm-flex justify-content-between mb-2">
-                                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">Topic name</small></h5>
+                                <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>
                                 <div class="media-reply__link">
-                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
-                                    <button class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php'">Comment</button>
+                                    <form method="POST" action="index.php">
+                                                        <span>
+                                                            <input type="hidden" name="post_id" value="<?php echo $post["post_id"]; ?>">
+<!--                                                            <button type="button" class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>-->
+<!--                                                            <button class="btn btn-transparent p-0 mr-3" type="submit" name="delete"><i class="ti-trash"></i></button>-->
+                                                            <button type="button" class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php?id=<?php echo $post["post_id"]; ?>'">Comment</button>
+                                                        </span>
+                                    </form>
+
                                 </div>
                             </div>
 
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                            <form method="post" action="topicFeed.php">
-                                <input type="hidden" name="productId" value="<?php echo $post["post_id"]; ?>">
-                                <button class="btn btn-transparent p-0 mr-3"><i class="ti-trash" type="submit"></i></button>
-                            </form>
+                            <p><?php echo $post["post_data"] ?></p>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <?php
+
+                    }
+                    ?>
 
         </div>
         <!-- #/ container -->

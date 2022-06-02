@@ -9,9 +9,9 @@ if(!isset($_SESSION["user_id"]))
     session_start();
 }
 
-if(!$auth->isAuthenticated($vars->user)){
-    header('Location: ../auth/page-login.php');
-}
+    //if(!$auth->isAuthenticated($vars->user)){
+    //    header('Location: ../auth/page-login.php');
+    //}
 
 require_once '../../models/user.php';
 require_once '../../controllers/UserController.php';
@@ -30,6 +30,7 @@ $user->username = $_SESSION['username'];
 $user->user_firstname = $_SESSION['user_firstname'];
 $user->user_lastname = $_SESSION['user_lastname'];
 $user->user_email = $_SESSION['user_email'];
+//$user->user_status = $_SESSION['user_status'];
 
 if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_POST['user_email']) && isset($_POST['username']) && isset($_POST['password'])){
     if(!empty($_POST['user_firstname']) && !empty($_POST['user_lastname']) && !empty($_POST['user_email']) && !empty($_POST['username']) && !empty($_POST['password'])) {
@@ -49,6 +50,7 @@ if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_
             $user->user_lastname = $_POST['user_lastname'];
             $user->user_email = $_POST['user_email'];
             $user->password = $_POST['password'];
+//            $user->user_status = $_POST['user_status'];
 
             if ($userController->updateData($user)) {
                 header("location: updateData.php");
@@ -166,9 +168,13 @@ if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>UserName</label>
+                                    <label>Username</label>
                                     <input type="text" id="username" name="username" class="form-control" value="<?php echo $_SESSION['username']; ?>">
                                 </div>
+<!--                                <div class="form-group">-->
+<!--                                    <label>Status</label>-->
+<!--                                    <input type="text" id="user_status" name="user_status" class="form-control" value="--><?php //echo $_SESSION['user_status']; ?><!--">-->
+<!--                                </div>-->
 <!--                                <div class="form-group">-->
 <!--                                    <label>State</label>-->
 <!--                                    <select id="inputState" class="form-control">-->

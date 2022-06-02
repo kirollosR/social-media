@@ -44,7 +44,7 @@ class userController
         {
             $query="update users set username = '$user->username', user_firstname = '$user->user_firstname',
                                      user_lastname = '$user->user_lastname', user_email = '$user->user_email',
-                                     password = '$user->password'
+                                     password = '$user->password', user_status = '$user->user_status'
                     where user_id = $user->user_id";
             return $this->db->update($query);
         }

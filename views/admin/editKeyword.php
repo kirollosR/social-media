@@ -1,17 +1,54 @@
 <?php
-require_once '../../controllers/AuthController.php';
-require_once '../../models/vars.php';
-$vars = new vars;
-$auth = new AuthController();
-
+$keyword_id = $_GET['id'];
+$keyword_name = $_GET['name'];
 if(!isset($_SESSION['user_id'])){
     session_start();
 }
 
-if(!$auth->isAuthenticated($vars->admin)){
-    header('Location: ../auth/page-login.php');
+require_once '../../controllers/keywordController.php';
+require_once '../../models/keyword.php';
+
+$keywordController=new keywordController;
+// $keyword = new keyword;
+//$keyword_value = $keywordController->getKeyword($keyword_id);
+//$keywords = $keywordController->getAllKeywords();
+$errorMsg="";
+
+if(isset($_POST['word'])) {
+    if(!empty($_POST['word'])){
+        $keywordController->updateKeyword($_POST["word"], $_POST['rate']);
+    }
 }
+
+
+//if(isset($_POST['word']) && isset($_POST['rate']))
+//{
+//    if(!empty($_POST['word']) && !empty($_POST['rate']))
+//    {
+//        $keyword1= new keyword();
+//        $keyword1->keyword_name = $_POST['word'];
+//        $keyword1->keyword_score = $_POST['rate'];
+//
+//        if($keywordController->updateKeyword($keyword_id,$keyword_name,$keyword_score))
+//        {
+//            $keyword = $keywordController->getKeyword($_GET["id"]);
+//            header("location: keyword.php");
+//        }
+//        else
+//        {
+//            $errMsg="Something Went Wrong... Try Again";
+//        }
+//    }
+//    else
+//    {
+//        $errMsg = "Please fill all fields";
+//    }
+//}
+
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,27 +121,61 @@ if(!$auth->isAuthenticated($vars->admin)){
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
+                        <!--                        <h4 class="card-title">Search for keyword</h4>-->
+                        <!--                        <div class="basic-form">-->
+                        <!--                            <form method= "POST" action = "editKeyword.php">-->
+                        <!--                                <div class="form-row">-->
+                        <!--                                    <div class="form-group col-md-4">-->
+                        <!--                                        <label>Word</label>-->
+                        <!--                                        <select id="inputState" name= "rate" class="form-control">-->
+                        <!--                                            --><?php
+                        //                                            foreach ($keywords as $keyword){
+                        //                                            ?>
+                        <!--                                                <option value="--><?php //echo $keyword['keyword_id']?><!--">--><?php //echo $keyword['keyword_name'] ?><!--</option>-->
+                        <!--                                            --><?php
+                        //                                            }
+                        //                                            ?>
+                        <!--                                        </select>-->
+                        <!--                                    <input id="word" name="word" type="text" class="form-control" value="">-->
+                        <!--                                    </div>-->
+                        <!---->
+                        <!---->
+                        <!--                                </div>-->
+                        <!---->
+                        <!--                                <button type="submit" class="btn mb-1 btn-primary">Search</button>-->
+                        <!--                               <button type="button" class="btn mb-1 btn-secondary" onclick="window.location.href='keyword.php'">Back</button>-->
+                        <!--                            </form>-->
                         <h4 class="card-title">Edit keyword</h4>
                         <div class="basic-form">
-                            <form>
+                            <form method= "POST" action = "editKeyword.php" id="formAuthentication">
                                 <div class="form-row">
-                                <div class="form-group col-md-4">
+                                    <div class="form-group col-md-4">
                                         <label>Word</label>
-                                        <input type="text" class="form-control" value="Word">
+<!--                                        <select id="inputState" name= "word" class="form-control">-->
+<!--                                            --><?php
+//                                            foreach ($keywords as $keyword){
+//                                                ?>
+<!--                                                <option value="--><?php //echo $keyword['keyword_name']?><!--">--><?php //echo $keyword['keyword_name'] ?><!--</option>-->
+<!--                                                --><?php
+//                                            }
+//                                            ?>
+<!--                                        </select>-->
+                                        <input type="hidden" name="keyword_id" value="<?php echo $keyword_id ?>">
+                                        <input id="word" name="word" type="text" class="form-control" value="<?php echo $keyword_name; ?>">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Rate</label>
-                                        <select id="inputState" class="form-control">
-                                            <option selected="selected">Choose...</option>
-                                            <option>Option 1</option>
-                                            <option>Option 2</option>
-                                            <option>Option 3</option>
+                                        <select id="inputState" name= "rate" class="form-control">
+                                            <option value="10" selected>Very Positive</option>
+                                            <option value="8">Positive</option>
+                                            <option value="6">Neutral</option>
+                                            <option value="4">Negative</option>
+                                            <option value="2">Very Negative</option>
                                         </select>
                                     </div>
-
                                 </div>
 
-                                <button type="submit" class="btn mb-1 btn-primary">Update</button>
+                                <button type="submit" name="update" class="btn mb-1 btn-primary">Update</button>
                                 <button type="button" class="btn mb-1 btn-secondary" onclick="window.location.href='keyword.php'">Back</button>
                             </form>
                         </div>
