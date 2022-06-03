@@ -141,7 +141,7 @@ if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_
                                     </div>
                                     <button class="btn login-form__btn submit w-100">Register</button>
                                 </form>
-                                    <p class="mt-5 login-form__footer">Have account <a href="page-login.php" class="text-primary">Log in </a> now</p>
+                                    <p class="mt-5 login-form__footer">Have account <a href="../../index.php" class="text-primary">Log in </a> now</p>
                                     </p>
                                 </div>
                             </div>
