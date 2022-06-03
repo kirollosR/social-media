@@ -72,19 +72,5 @@ class keywordController
             return false;
         }
     }
-
-    public function getKeyword($keyword_id) {
-        $this->db=new DBController;
-        if($this->db->openConnection())
-        {
-            $query="select * from keywords where keyword_id = $keyword_id";
-            return $this->db->select($query);
-        }
-        else
-        {
-            echo "Error in Database Connection";
-            return false;
-        }
-    }
 }   
 ?> 
