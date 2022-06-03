@@ -58,13 +58,27 @@ class keywordController
         }
     }
 
-    public function updateKeyword($keyword_name,$keyword_score){
+    public function updateKeyword($keyword_id,$keyword_name,$keyword_score){
         $this->db=new DBController;
         if($this->db->openConnection())
         {
-            $query="update keywords set keyword_score=$keyword_score
-                    where keyword_name = '$keyword_name'";
+            $query="update keywords set keyword_name = '$keyword_name' , keyword_score=$keyword_score
+                    where keyword_id = $keyword_id";
             return $this->db->update($query);
+        }
+        else
+        {
+            echo "Error in Database Connection";
+            return false;
+        }
+    }
+
+    public function getKeyword($keyword_id) {
+        $this->db=new DBController;
+        if($this->db->openConnection())
+        {
+            $query="select * from keywords where keyword_id = $keyword_id";
+            return $this->db->select($query);
         }
         else
         {

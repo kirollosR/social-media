@@ -14,36 +14,37 @@ $keywordController=new keywordController;
 //$keywords = $keywordController->getAllKeywords();
 $errorMsg="";
 
-if(isset($_POST['word'])) {
-    if(!empty($_POST['word'])){
-        $keywordController->updateKeyword($_POST["word"], $_POST['rate']);
-    }
-}
-
-
-//if(isset($_POST['word']) && isset($_POST['rate']))
-//{
-//    if(!empty($_POST['word']) && !empty($_POST['rate']))
-//    {
-//        $keyword1= new keyword();
-//        $keyword1->keyword_name = $_POST['word'];
-//        $keyword1->keyword_score = $_POST['rate'];
-//
-//        if($keywordController->updateKeyword($keyword_id,$keyword_name,$keyword_score))
-//        {
-//            $keyword = $keywordController->getKeyword($_GET["id"]);
-//            header("location: keyword.php");
-//        }
-//        else
-//        {
-//            $errMsg="Something Went Wrong... Try Again";
-//        }
-//    }
-//    else
-//    {
-//        $errMsg = "Please fill all fields";
+//if(isset($_POST['word'])) {
+//    if(!empty($_POST['word'])){
+//        $keywordController->updateKeyword($_POST['keyword_id'],$_POST["word"], $_POST['rate']);
 //    }
 //}
+
+
+if(isset($_POST['word']) && isset($_POST['rate']))
+{
+    if(!empty($_POST['word']) && !empty($_POST['rate']))
+    {
+        $keyword1= new keyword();
+        $keyword1->keyword_id = $_POST['keyword_id'];
+        $keyword1->keyword_name = $_POST['word'];
+        $keyword1->keyword_score = $_POST['rate'];
+
+        if($keywordController->updateKeyword($keyword1->keyword_id,$keyword1->keyword_name,$keyword1->keyword_score))
+        {
+//            $keyword = $keywordController->getKeyword($_POST["keyword_id"]);
+            header("location: keyword.php");
+        }
+        else
+        {
+            $errMsg="Something Went Wrong... Try Again";
+        }
+    }
+    else
+    {
+        $errMsg = "Please fill all fields";
+    }
+}
 
 
 
@@ -147,19 +148,10 @@ if(isset($_POST['word'])) {
                         <!--                            </form>-->
                         <h4 class="card-title">Edit keyword</h4>
                         <div class="basic-form">
-                            <form method= "POST" action = "editKeyword.php" id="formAuthentication">
+                            <form method= "POST" action = "" id="formAuthentication">
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label>Word</label>
-<!--                                        <select id="inputState" name= "word" class="form-control">-->
-<!--                                            --><?php
-//                                            foreach ($keywords as $keyword){
-//                                                ?>
-<!--                                                <option value="--><?php //echo $keyword['keyword_name']?><!--">--><?php //echo $keyword['keyword_name'] ?><!--</option>-->
-<!--                                                --><?php
-//                                            }
-//                                            ?>
-<!--                                        </select>-->
                                         <input type="hidden" name="keyword_id" value="<?php echo $keyword_id ?>">
                                         <input id="word" name="word" type="text" class="form-control" value="<?php echo $keyword_name; ?>">
                                     </div>
