@@ -156,7 +156,7 @@ if(isset($_POST['delete']))
                                                     <input type="hidden" name="post_id" value="<?php echo $post["post_id"]; ?>">
 <!--                                                    <button type="button" class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>-->
 <!--                                                    <button class="btn btn-transparent p-0 mr-3" type="submit" name="delete"><i class="ti-trash"></i></button>-->
-                                                    <button type="button" class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php?id=<?php echo $post["post_id"]; ?>'">Comment</button>
+                                                    <button type="button" class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php?id=<?php echo $post["post_id"]; ?>&name=<?php echo $post["post_name"]; ?>'">Comment</button>
                                                 </span>
                                             </form>
 
