@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2022 at 10:47 AM
+-- Generation Time: Jun 04, 2022 at 12:50 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -54,7 +54,9 @@ INSERT INTO `comments` (`comment_id`, `user_id`, `topic_id`, `post_id`, `comment
 (36, 1, 10, 21, 8, NULL, 'good'),
 (37, 1, 10, 22, 8, NULL, 'good'),
 (38, 1, 10, 22, 10, NULL, 'yes'),
-(44, 1, 8, 5, 10, NULL, 'great');
+(44, 1, 8, 5, 10, NULL, 'great'),
+(45, 1, 6, 34, 10, NULL, 'good'),
+(47, 1, 8, 5, 0, NULL, 'hey');
 
 -- --------------------------------------------------------
 
@@ -93,14 +95,15 @@ CREATE TABLE `keywords` (
 --
 
 INSERT INTO `keywords` (`keyword_id`, `keyword_name`, `keyword_score`, `user_id`) VALUES
-(5, 'fuck', 4, 30),
-(14, 'good', 10, 30),
-(15, 'yes', 10, 30),
+(5, 'fuck', 2, 30),
+(14, 'good', 8, 30),
+(15, 'yes', 6, 30),
 (17, 'great', 10, 30),
 (18, 'perfect', 10, 30),
-(19, 'yes', 10, 30),
-(21, 'no', 4, 30),
-(22, 'beautifull', 10, 30);
+(19, 'yes', 8, 30),
+(22, 'beautifull', 10, 30),
+(23, 'bad', 4, 30),
+(24, 'no', 2, 30);
 
 -- --------------------------------------------------------
 
@@ -123,7 +126,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `user_id`, `topic_id`, `post_score`, `post_date`, `post_data`, `post_likes`) VALUES
-(5, 1, 8, 9, NULL, 'I want to buy a new laptop, any recommendations !!', 0),
+(5, 1, 8, 6, NULL, 'I want to buy a new laptop, any recommendations !!', 0),
 (6, 1, 10, 7, NULL, 'when', 0),
 (8, 1, 0, 0, NULL, 'nxc', 0),
 (9, 14, 10, 6.66667, NULL, 'very good', 0),
@@ -139,13 +142,29 @@ INSERT INTO `posts` (`post_id`, `user_id`, `topic_id`, `post_score`, `post_date`
 (21, 14, 8, 8, NULL, 'hellos guys', NULL),
 (22, 5, 6, 9, NULL, 'i want laptop', NULL),
 (23, 30, 7, 0, NULL, 'hello', 0),
-(24, 30, 0, 0, NULL, 'heeloos ', 0),
-(25, 30, 0, 0, NULL, 'hellos post', 0),
-(26, 30, 0, 0, NULL, 'hey there', 0),
-(27, 30, 0, 0, NULL, 'hey', 0),
-(28, 30, 0, 0, NULL, 'he', 0),
-(29, 30, 0, 0, NULL, 'hell', 0),
-(30, 1, 0, 0, NULL, 'hey', 0);
+(32, 1, 10, 0, NULL, 'heyhey', 0),
+(34, 1, 6, 10, NULL, 'hellosssssss', 0),
+(35, 1, 6, 0, NULL, 'hellsssssss', 0),
+(36, 1, 7, 0, NULL, 'yummyy', 0),
+(37, 1, 10, 0, NULL, '12', 0),
+(38, 1, 10, 0, NULL, 'ber', 0),
+(39, 1, 7, 0, NULL, 'delicious', 0),
+(40, 1, 7, 0, NULL, 'wow\r\n', 0),
+(41, 1, 7, 0, NULL, 'want 1', 0),
+(42, 1, 6, 0, NULL, 'nice car', 0),
+(43, 1, 10, 0, NULL, 'nice game', 0),
+(44, 1, 0, 0, NULL, 'samsung', 0),
+(45, 1, 7, 0, NULL, 'ehbhe', 0),
+(46, 1, 11, 10, NULL, 'samsung', 0),
+(48, 1, 11, 0, NULL, 'i have a phone now', 0),
+(49, 1, 11, 0, NULL, 'yaaaas', 0),
+(50, 1, 11, 0, NULL, 'wohoo', 0),
+(51, 1, 11, 0, NULL, 'please', 0),
+(52, 1, 11, 0, NULL, 'yess', 0),
+(53, 1, 11, 0, NULL, 'wohoo', 0),
+(54, 1, 8, 0, NULL, 'dell', 0),
+(55, 1, 10, 0, NULL, 'macbook', 0),
+(56, 1, 8, 0, NULL, 'wowwww', 0);
 
 -- --------------------------------------------------------
 
@@ -186,8 +205,7 @@ INSERT INTO `topics` (`topic_id`, `topic_name`, `user_id`) VALUES
 (6, 'Cars', 1),
 (7, 'Food', 1),
 (8, 'Laptops', 1),
-(10, 'Football', 30),
-(11, 'Phones', 1);
+(10, 'Football', 30);
 
 -- --------------------------------------------------------
 
@@ -297,7 +315,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `gender`
@@ -309,13 +327,13 @@ ALTER TABLE `gender`
 -- AUTO_INCREMENT for table `keywords`
 --
 ALTER TABLE `keywords`
-  MODIFY `keyword_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `keyword_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -327,7 +345,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -344,7 +362,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`topic_id`),
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`topic_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comments_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `comments_ibfk_5` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`topic_id`) ON DELETE CASCADE,
