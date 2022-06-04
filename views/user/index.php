@@ -8,7 +8,7 @@ if(!isset($_SESSION['user_id'])){
     session_start();
 }
 if(!$auth->isAuthenticated($vars->user)){
-    header('Location: ../auth/page-login.php');
+    header('Location: ../../index.php');
 }
 
 require_once '../../controllers/PostController.php';
@@ -156,7 +156,7 @@ if(isset($_POST['delete']))
                                                     <input type="hidden" name="post_id" value="<?php echo $post["post_id"]; ?>">
 <!--                                                    <button type="button" class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>-->
 <!--                                                    <button class="btn btn-transparent p-0 mr-3" type="submit" name="delete"><i class="ti-trash"></i></button>-->
-                                                    <button type="button" class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php?id=<?php echo $post["post_id"]; ?>&data=<?php echo $post["post_data"]; ?>'">Comment</button>
+                                                    <button type="button" class="btn btn-transparent p-0 ml-3 font-weight-bold" onclick="window.location.href='add-comment.php?id=<?php echo $post["post_id"]; ?>'">Comment</button>
                                                 </span>
                                             </form>
 
