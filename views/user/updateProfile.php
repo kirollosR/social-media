@@ -9,9 +9,9 @@ if(!isset($_SESSION["user_id"]))
     session_start();
 }
 
-if(!$auth->isAuthenticated($vars->user)){
-    header('Location: ../auth/page-login.php');
-}
+//if(!$auth->isAuthenticated($vars->user)){
+//    header('Location: ../auth/page-login.php');
+//}
 
 require_once '../../models/user.php';
 require_once '../../controllers/UserController.php';
@@ -30,7 +30,7 @@ $user->user_status = $_SESSION['user_status'];
 if(isset($_POST['status']))
 {
     if(!empty($_POST['status']))
-    { 
+    {
         $userController = new UserController;
         $user->user_status = $_POST['status'];
 
@@ -43,7 +43,7 @@ if(isset($_POST['status']))
             $errMsg="Something Went Wrong... Try Again";
         }
     }
-    else 
+    else
     {
         $errMsg = "Please fill all fields";
     }
@@ -126,7 +126,7 @@ if(isset($_POST['status']))
                     <div class="card-body">
                         <h4 class="card-title">Edit profile picture & status</h4>
                         <form action="updateProfile.php" method="POST">
-                            
+
                                 <?php
                                     if($errMsg != ""){
                                 ?>
@@ -138,10 +138,18 @@ if(isset($_POST['status']))
                                 <?php
                                     }
                                 ?>
-                        
-                            <input type="hidden" name="productId" value="<?php //echo $product["id"]; ?>">
+
+
                             <div class="media align-items-center mb-4">
-                                <img class="mr-3" src="../../assets/images/avatar/11.png" width="80" height="80" alt="">
+                                <img class="mr-3" src="
+                                      <?php
+                                    if($_SESSION['user_profile'] == NULL){
+                                        echo "../../assets/images/member/user.png";
+                                    }else{
+                                        echo $_SESSION['user_profile'];
+                                    }
+                                 ?>"
+                                     width="80" height="80" alt="">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend"></div>
                                         <div class="custom-file">

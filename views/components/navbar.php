@@ -52,7 +52,14 @@
                 <li class="icons dropdown">
                     <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
 <!--                        <span class="activity active"></span>-->
-                        <img src="../../assets/images/member/user.png" height="40" width="40" alt="">
+                        <img src="<?php
+                            if($_SESSION['user_profile'] == NULL){
+                                echo "../../assets/images/member/user.png";
+                            }else{
+                                echo $_SESSION['user_profile'];
+                            }
+                            ?>"
+                             height="40" width="40" alt="">
                     </div>
                     <div class="drop-down dropdown-profile   dropdown-menu">
                         <div class="dropdown-content-body">

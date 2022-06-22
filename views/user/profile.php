@@ -39,6 +39,47 @@ if(isset($_POST['delete']))
         }
     }
 }
+
+require_once '../../controllers/UserController.php';
+$userController = new UserController;
+
+$errorMsg = "";
+
+if(isset($_POST["status"])){
+    if(!empty($_POST["status"])){
+        $user->user_status = $_POST["status"];
+
+        if($userController->updateStatus($user))
+        {
+            header("location: profile.php");
+        }
+        else
+        {
+            $errMsg="Something Went Wrong... Try Again";
+        }
+    }
+    else
+    {
+        $errMsg = "Please fill all fields";
+    }
+}
+
+if(isset($_FILES["image"])){
+    //IMAGE
+    $location = "../../assets/images/member/" . date("h-i-s") . $_FILES["image"]["name"]; //image path
+
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $location)) {
+        $user->user_profile = $location;
+
+        if ($userController->updateProfilePicture($user)) {
+            header("Location: profile.php");
+        } else {
+            $errorMsg = "Something went wrong.. Please try again";
+        }
+    } else {
+        $errorMsg = "Error in upload";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +94,11 @@ if(isset($_POST['delete']))
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <!-- Custom Stylesheet -->
     <link href="../../assets/css/style.css" rel="stylesheet">
+    <style>
+        img {
+            border-radius: 50%;
+        }
+    </style>
 
 </head>
 
@@ -107,10 +153,19 @@ if(isset($_POST['delete']))
                     <div class="card">
                         <div class="card-body">
                             <div class="media align-items-center mb-4">
-                                <img class="mr-3" src="../../assets/images/member/user.png" width="80" height="80" alt="">
+                                <button type="button" class="btn btn-transparent p-0 mr-3" data-toggle="modal" data-target="#updateProfile"><i class="fa fa-upload"></i></button>
+                                <img class="mr-3" src="<?php
+                                    if($_SESSION['user_profile'] == NULL){
+                                        echo "../../assets/images/member/user.png";
+                                    }else{
+                                        echo $user->user_profile;
+                                    }
+                                    ?>"
+                                     width="80" height="80" alt="">
                                 <div class="media-body">
                                     <h3 class="mb-0"><?php echo $user->username; ?></h3>
                                 </div>
+
                             </div>
 
                             <div class="row mb-5">
@@ -118,15 +173,85 @@ if(isset($_POST['delete']))
                                 </div>
                                 <div class="col">
                                 </div>
-                                <div class="col-12 text-center">
-                                    <button type="button" class="btn mb-1 btn-outline-danger px-5" onclick="window.location.href='updateProfile.php'">Update Profile</button>
+<!--                                <div class="col-12 text-center">-->
+<!--                                    <button type="button" class="btn mb-1 btn-outline-danger px-5" onclick="window.location.href='updateProfile.php'">Update Profile</button>-->
+<!--                                </div>-->
+                                <div class="bootstrap-modal">
+                                    <!-- Button trigger modal -->
+<!--                                    <div class="col-12 text-center">-->
+<!--                                        <button type="button" class="btn mb-1 btn-outline-danger px-5" data-toggle="modal" data-target="#exampleModalCenter">Update Profile</button>-->
+<!--                                    </div>-->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="updateProfile" style="display: none;" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Change Profile Picture</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="profile.php" method="POST" enctype='multipart/form-data'>
+                                                        <div class="media align-items-center mb-4">
+                                                            <img class="mr-3" src="
+                                                                 <?php
+                                                                    if($_SESSION['user_profile'] == NULL){
+                                                                        echo "../../assets/images/member/user.png";
+                                                                    }else{
+                                                                        echo $user->user_profile;
+                                                                    }
+                                                                 ?>"
+                                                                 width="80" height="80" alt="">
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend"></div>
+                                                                <div class="custom-file">
+                                                                    <input class="form-control" type="file" id="formFile" name="image" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12 text-center">
                                     <button class="btn btn-danger px-5" onclick="window.location.href='updateData.php'">Update Data</button>
                                 </div>
                             </div>
 
-                            <h4>Status</h4>
+                            <h4>Status <button type="button" class="btn btn-transparent p-0 mr-3" data-toggle="modal" data-target="#statusModal"><i class="fa fa-edit"></i></button></h4>
+                            <div class="bootstrap-modal">
+                                <!-- Modal -->
+                                <div class="modal fade" id="statusModal" style="display: none;" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Change Status</h5>
+                                                <button type="button" class="close" data-dismiss="modal"><span>×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="profile.php" method="POST">
+                                                    <div class="media align-items-center mb-4">
+                                                        <textarea class="text-muted form-control" name="status" id="textarea" cols="30" rows="2"><?php echo $user->user_status; ?></textarea>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <p class="text-muted"><?php echo $user->user_status; ?></p>
                             <ul class="card-profile__info">
                                 <li><strong class="text-dark mr-4">Email</strong> <span><?php echo $user->user_email; ?></span></li>
@@ -134,7 +259,18 @@ if(isset($_POST['delete']))
                         </div>
                     </div>
                 </div>
-                
+
+                <?php
+                if($errorMsg != ""){
+                    ?>
+                    <br>
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <?php echo $errorMsg; ?>
+                    </div>
+                    <?php
+                }
+                ?>
                 <?php
                 if (count($posts) == 0)
                 {
