@@ -96,11 +96,6 @@ if(isset($_FILES["image"])){
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/logo-color.png">
     <!-- Custom Stylesheet -->
     <link href="../../assets/css/style.css" rel="stylesheet">
-    <style>
-        img {
-            border-radius: 50%;
-        }
-    </style>
 
 </head>
 
@@ -163,7 +158,7 @@ if(isset($_FILES["image"])){
                                         echo $user->user_profile;
                                     }
                                     ?>"
-                                     width="80" height="80" alt="">
+                                     width="80" height="80" alt="" style="border-radius: 50%">
                                 <div class="media-body">
                                     <h3 class="mb-0"><?php echo $user->username; ?></h3>
                                 </div>
@@ -203,7 +198,7 @@ if(isset($_FILES["image"])){
                                                                         echo $user->user_profile;
                                                                     }
                                                                  ?>"
-                                                                 width="80" height="80" alt="">
+                                                                 width="80" height="80" alt="" style="border-radius: 50%">
                                                             <div class="input-group mb-3">
                                                                 <div class="input-group-prepend"></div>
                                                                 <div class="custom-file">
@@ -290,7 +285,15 @@ if(isset($_FILES["image"])){
                         foreach ($posts as $post) {
                         ?>
                                     <div class="media media-reply">
-                                        <img class="mr-3 circle-rounded" src="../../assets/images/member/user.png"" width="50" height="50" alt="Generic placeholder image">
+                                        <img class="mr-3" src="
+                                        <?php
+                                        if($_SESSION['user_profile'] == NULL){
+                                            echo "../../assets/images/member/user.png";
+                                        }else{
+                                            echo $user->user_profile;
+                                        }
+                                        ?>"
+                                             width="50" height="50" alt="" style="border-radius: 50%">
                                         <div class="media-body">
                                             <div class="d-sm-flex justify-content-between mb-2">
                                                 <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>

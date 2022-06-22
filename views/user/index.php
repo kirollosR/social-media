@@ -46,6 +46,12 @@ if(isset($_POST['delete']))
     <!-- Custom Stylesheet -->
     <link href="../../assets/css/style.css" rel="stylesheet">
 
+    <style>
+        img {
+            border-radius: 50%;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -145,7 +151,15 @@ if(isset($_POST['delete']))
                         ?>
 
                             <div class="media media-reply">
-                                <img class="mr-3 circle-rounded" src="../../assets/images/member/user.png" width="50" height="50" alt="Generic placeholder image">
+                                <img class="mr-3" src="
+                                                                 <?php
+                                if($post["user_profile"] == NULL){
+                                    echo "../../assets/images/member/user.png";
+                                }else{
+                                    echo $post["user_profile"];
+                                }
+                                ?>"
+                                     width="50" height="50" alt="">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
                                         <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small><small class="text-muted ml-3"><?php echo $PostController->postRank($post["post_id"]); ?></small></h5>

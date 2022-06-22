@@ -2,9 +2,9 @@
     <div class="brand-logo">
         <a href="">
             <b class="logo-abbr"><img src="../../assets/images/logo1.png" alt=""> </b>
-            <span class="logo-compact"><img src="../../assets/images/logo1.png" alt=""></span>
+            <span class="logo-compact"><img src="../../assets/images/logo-compact.png" alt=""></span>
             <span class="brand-title">
-                <img src="../../assets/images/logo1.png" alt="" style="width: 20%;">
+                <img src="../../assets/images/logo-compact.png" alt="" style="width: 60%;">
             </span>
         </a>
     </div>
@@ -59,7 +59,7 @@
                                 echo $_SESSION['user_profile'];
                             }
                             ?>"
-                             height="40" width="40" alt="">
+                             height="40" width="40" alt="" style="border-radius: 50%">
                     </div>
                     <div class="drop-down dropdown-profile   dropdown-menu">
                         <div class="dropdown-content-body">

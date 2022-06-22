@@ -6,12 +6,12 @@ $auth = new AuthController();
 
 require_once '../../controllers/PostController.php';
 require_once '../../models/Post.php';
+$PostController=new PostController;
 
 //$topic_id = $_GET['id'];
 //settype($topic_id,'integer');
 
 if(isset($_GET['id'])) {
-    $PostController = new PostController;
     $posts = $PostController->getPostsByTopic($_GET['id']);
 }
 //TODO: I can't get the posts by topic id
@@ -26,9 +26,6 @@ if(!$auth->isAuthenticated($vars->user)){
     header('Location: ../auth/page-login.php');
 }
 
-require_once '../../controllers/PostController.php';
-require_once '../../models/Post.php';
-$PostController=new PostController;
 
 require_once '../../controllers/TopicController.php';
 $topicController = new TopicController;
@@ -173,7 +170,15 @@ if(isset($_POST['addPost'])){
                     ?>
 
                     <div class="media media-reply">
-                        <img class="mr-3 circle-rounded" src="../../assets/images/member/user.png" width="50" height="50" alt="Generic placeholder image">
+                        <img class="mr-3" src="
+                                                                 <?php
+                        if($post["user_profile"] == NULL){
+                            echo "../../assets/images/member/user.png";
+                        }else{
+                            echo $post["user_profile"];
+                        }
+                        ?>"
+                             width="50" height="50" alt="" style="border-radius: 50%">
                         <div class="media-body">
                             <div class="d-sm-flex justify-content-between mb-2">
                                 <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small></h5>
