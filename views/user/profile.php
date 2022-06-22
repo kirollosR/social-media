@@ -51,6 +51,7 @@ if(isset($_POST["status"])){
 
         if($userController->updateStatus($user))
         {
+            $_SESSION["user_status"] = $_POST["status"];
             header("location: profile.php");
         }
         else
@@ -70,6 +71,7 @@ if(isset($_FILES["image"])){
 
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $location)) {
         $user->user_profile = $location;
+        $_SESSION["user_profile"] = $location;
 
         if ($userController->updateProfilePicture($user)) {
             header("Location: profile.php");

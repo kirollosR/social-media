@@ -53,12 +53,21 @@ if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_
 //            $user->user_status = $_POST['user_status'];
 
             if ($userController->updateData($user)) {
-                header("location: updateData.php");
+                header("location: profile.php");
+                $_SESSION["username"] = $_POST["username"];
+                $_SESSION["user_firstname"] = $_POST["user_firstname"];
+                $_SESSION["user_lastname"] = $_POST["user_lastname"];
+                $_SESSION["user_email"] = $_POST["user_email"];
+                $_SESSION["password"] = $_POST["password"];
             } else {
                 $errMsg = "Something Went Wrong... Try Again";
             }
         }
+    }else {
+        $errMsg = "Something Went Wrong... Try Again";
     }
+}else {
+    $errMsg = "Something Went Wrong... Try Again";
 }
 ?>
 <!DOCTYPE html>
@@ -146,7 +155,7 @@ if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_
                         }
                         ?>
                         <div class="basic-form">
-                            <form method="post" action="profile.php">
+                            <form method="post" action="updateData.php">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>First Name</label>
