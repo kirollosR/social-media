@@ -9,10 +9,10 @@ if(!isset($_SESSION['user_id'])){
 }
 
 if(!$auth->isAuthenticated($vars->user)){
-    header('Location: ../auth/page-login.php');
+    header('Location: ../../index.php');
 }
 //extends Com_Controller & Comment files
-require_once '../../controllers/commentController.php';
+require_once '../../controllers/CommentController.php';
 $Comment_Controller=new commentController();
 
 require_once '../../controllers/UserController.php';

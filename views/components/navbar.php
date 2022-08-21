@@ -4,7 +4,7 @@
             <b class="logo-abbr"><img src="../../assets/images/logo1.png" alt=""> </b>
             <span class="logo-compact"><img src="../../assets/images/logo-compact.png" alt=""></span>
             <span class="brand-title">
-                <img src="../../assets/images/logo-compact.png" alt="" style="width: 60%;">
+                <img src="../../assets/images/logo-compact.png" alt="" style="width: 50%;">
             </span>
         </a>
     </div>

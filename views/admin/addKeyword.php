@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+if(!isset($_SESSION['user_id'])){
+    session_start();
+}
 
 require_once '../../controllers/keywordController.php';
 require_once '../../models/keyword.php';
@@ -11,12 +15,8 @@ require_once '../../models/vars.php';
 $vars = new vars;
 $auth = new AuthController();
 
-if(!isset($_SESSION['user_id'])){
-    session_start();
-}
-
 if(!$auth->isAuthenticated($vars->admin)){
-    header('Location: ../auth/page-login.php');
+    header('Location: ../../index.php');
 }
 
 

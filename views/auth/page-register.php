@@ -12,10 +12,10 @@ $vars = new vars;
 $auth = new AuthController;
 $genders = $auth->getGenders();
 
-if(!isset($_SESSION["user_id"]))
-{
-    session_start();
-}
+//if(!isset($_SESSION["user_id"]))
+//{
+//    session_start();
+//}
 
 if(isset($_POST['user_firstname']) && isset($_POST['user_lastname']) && isset($_POST['user_email']) && isset($_POST['username']) && isset($_POST['password'])){
     if(!empty($_POST['user_firstname']) && !empty($_POST['user_lastname']) && !empty($_POST['user_email']) && !empty($_POST['username']) && !empty($_POST['password'])) {

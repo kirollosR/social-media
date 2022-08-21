@@ -19,7 +19,8 @@ class keywordController
         if($this->db->openConnection())
         {
             settype($keyword->user_id,'integer');
-            $query="insert into keywords values ( '' , '$keyword->keyword_name' , $keyword->keyword_score , $keyword->user_id )";
+            $query="insert into keywords(keyword_name, keyword_score, user_id) 
+            values ('$keyword->keyword_name' , $keyword->keyword_score , $keyword->user_id )";
            return $this->db->insert($query);
         }
         else {

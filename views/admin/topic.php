@@ -1,5 +1,9 @@
 <?php
 
+if(!isset($_SESSION['user_id'])){
+    session_start();
+}
+
 // ADD TOPIC
 
 require_once '../../models/topic.php';
@@ -8,16 +12,14 @@ require_once '../../controllers/TopicController.php';
 $errMsg = "";
 $topicController = new TopicController;
 
-if(!isset($_SESSION['user_id'])){
-    session_start();
-}
+
 
 require_once '../../controllers/AuthController.php';
 require_once '../../models/vars.php';
 $vars = new vars;
 $auth = new AuthController();
 if(!$auth->isAuthenticated($vars->admin)){
-    header('Location: ../auth/page-login.php');
+    header('Location: ../../index.php');
 }
 
 $addMsg = false;
@@ -155,7 +157,7 @@ if(isset($_POST['delete']))
                                     if($errMsg != ""){
                                         ?>
                                         <br>
-                                        <div class="alert alert-success alert-dismissible fade show">
+                                        <div class="alert alert-danger alert-dismissible fade show">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                             <?php echo $errMsg; ?>
                                         </div>
@@ -196,7 +198,7 @@ if(isset($_POST['delete']))
                         if($dltMsg){
                             ?>
                             <br>
-                            <div class="alert alert-danger alert-dismissible fade show">
+                            <div class="alert alert-success alert-dismissible fade show">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                 <?php echo "Topic deleted successfully."; ?>
                             </div>

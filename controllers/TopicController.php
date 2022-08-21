@@ -18,7 +18,7 @@ class TopicController
         $this->db=new DBController;
         if($this->db->openConnection())
         {
-            $query="insert into topics values ( '' , '$topic->topic_name', $topic->user_id )";
+            $query="insert into topics(topic_name, user_id) values ('$topic->topic_name', $topic->user_id )";
             return $this->db->insert($query);
         }
         else {

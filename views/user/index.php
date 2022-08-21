@@ -46,11 +46,11 @@ if(isset($_POST['delete']))
     <!-- Custom Stylesheet -->
     <link href="../../assets/css/style.css" rel="stylesheet">
 
-    <style>
-        img {
-            border-radius: 50%;
-        }
-    </style>
+<!--    <style>-->
+<!--        img {-->
+<!--            border-radius: 50%;-->
+<!--        }-->
+<!--    </style>-->
 
 </head>
 
@@ -159,7 +159,7 @@ if(isset($_POST['delete']))
                                     echo $post["user_profile"];
                                 }
                                 ?>"
-                                     width="50" height="50" alt="">
+                                     width="50" height="50" alt="" style="border-radius: 50%">
                                 <div class="media-body">
                                     <div class="d-sm-flex justify-content-between mb-2">
                                         <h5 class="mb-sm-0"><?php echo $post["username"] ?><small class="text-muted ml-3"><?php echo $post["topic_name"] ?></small><small class="text-muted ml-3"><?php echo $PostController->postRank($post["post_id"]); ?></small></h5>

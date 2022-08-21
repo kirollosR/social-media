@@ -5,7 +5,7 @@ $vars = new vars;
 $auth = new AuthController();
 
 require_once '../../controllers/PostController.php';
-require_once '../../models/Post.php';
+require_once '../../models/post.php';
 $PostController=new PostController;
 
 //$topic_id = $_GET['id'];
@@ -23,7 +23,7 @@ if(!isset($_SESSION['user_id'])){
 }
 
 if(!$auth->isAuthenticated($vars->user)){
-    header('Location: ../auth/page-login.php');
+    header('Location: ../../index.php');
 }
 
 

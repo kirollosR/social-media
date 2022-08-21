@@ -10,7 +10,7 @@ if(!isset($_SESSION["user_id"]))
 }
 
 if(!$auth->isAuthenticated($vars->user)){
-    header('Location: ../auth/page-login.php');
+    header('Location: ../../index.php');
 }
 
 require_once '../../models/user.php';

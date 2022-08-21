@@ -17,7 +17,7 @@ if(!isset($_SESSION['user_id'])){
 }
 
 if(!$auth->isAuthenticated($vars->admin)){
-    header('Location: ../auth/page-login.php');
+    header('Location: ../../index.php');
 }
 ?>
 <!DOCTYPE html>
